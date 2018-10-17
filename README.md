@@ -1,3 +1,2 @@
 # AndroidStudyData
-android学习相关
 方便Android小知识点的学习调试
