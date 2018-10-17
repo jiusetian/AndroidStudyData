@@ -15,8 +15,21 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.contraitlayout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,ConstraintLayoutActivity.class));
+                startAct(ConstraintLayoutActivity.class);
             }
         });
+
+        findViewById(R.id.coordinatorlayout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startAct(CoordinatorLayoutActivity.class);
+            }
+        });
+
+
+    }
+
+    private void startAct(Class startClass){
+        startActivity(new Intent(MainActivity.this,startClass));
     }
 }
