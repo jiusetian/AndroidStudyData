@@ -27,7 +27,6 @@ import android.widget.TextView;
  *  5.getScroll获取view相对于初始位置的滑动的偏移量，而且原始位置的右边是负数，左边是正数
  */
 public class ScrollViewActivity extends AppCompatActivity {
-
     private String TAG = "tag";
     TextView tv;
     LinearLayout containerView;

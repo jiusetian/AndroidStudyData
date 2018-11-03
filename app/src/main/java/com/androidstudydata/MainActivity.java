@@ -33,10 +33,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.event_layout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAct(EventDispatchActivity.class);
+            }
+        });
 
     }
 
-    private void startAct(Class startClass){
-        startActivity(new Intent(MainActivity.this,startClass));
+    private void startAct(Class startClass) {
+        startActivity(new Intent(MainActivity.this, startClass));
     }
 }

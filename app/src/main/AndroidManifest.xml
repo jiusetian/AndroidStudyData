@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".ConstraintLayoutActivity" />
         <activity android:name=".CoordinatorLayoutActivity" />
-        <activity android:name=".ScrollViewActivity"></activity>
+        <activity android:name=".ScrollViewActivity" />
+        <activity android:name=".EventDispatchActivity"></activity>
     </application>
 
 </manifest>

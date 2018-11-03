@@ -29,4 +29,11 @@
         android:layout_height="wrap_content"
         android:text="View的Scroll相关"
         />
+
+    <Button
+        android:id="@+id/event_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="view的事件分发机制相关"
+        />
 </LinearLayout>
