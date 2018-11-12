@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#11ff0000"
-    tools:context=".ConstraintLayoutActivity">
+    tools:context=".view.ConstraintLayoutActivity">
 
     <!--相对位置的相关布置-->
     <TextView

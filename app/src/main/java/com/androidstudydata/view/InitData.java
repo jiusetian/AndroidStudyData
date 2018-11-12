@@ -1,4 +1,4 @@
-package com.androidstudydata;
+package com.androidstudydata.view;
 
 import java.util.ArrayList;
 import java.util.List;

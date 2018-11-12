@@ -1,9 +1,13 @@
 package com.androidstudydata;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.androidstudydata.view.ConstraintLayoutActivity;
+import com.androidstudydata.view.CoordinatorLayoutActivity;
+import com.lib_java.dynamicProxy.DynamicProxyTest;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +30,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //动态代理
+        findViewById(R.id.dynamicLayout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //测试
+                DynamicProxyTest test=new DynamicProxyTest();
+                test.test();
+            }
+        });
 
     }
 

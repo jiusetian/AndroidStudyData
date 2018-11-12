@@ -16,8 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ConstraintLayoutActivity" />
-        <activity android:name=".CoordinatorLayoutActivity"></activity>
+        <activity android:name=".view.ConstraintLayoutActivity" />
+        <activity android:name=".view.CoordinatorLayoutActivity"></activity>
     </application>
 
 </manifest>

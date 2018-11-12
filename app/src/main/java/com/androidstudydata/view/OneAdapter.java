@@ -1,6 +1,7 @@
-package com.androidstudydata;
+package com.androidstudydata.view;
 
 
+import com.androidstudydata.R;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
