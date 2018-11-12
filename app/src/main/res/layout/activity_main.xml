@@ -23,11 +23,4 @@
         android:text="coordinatorlayout学习"
         />
 
-    <Button
-        android:id="@+id/dynamicLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="动态代理测试"
-        />
-
 </LinearLayout>
