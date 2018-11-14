@@ -29,5 +29,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //RecyclerView框架
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
-    implementation project (':lib-java')
+    implementation project(':lib-java')
 }
