@@ -1,7 +1,12 @@
 package com.androidstudydata.propertyanima;
 
 import android.animation.ValueAnimator;
+import android.content.Context;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
+import com.androidstudydata.Utils;
 import com.androidstudydata.java.LogUtils;
 
 /**
@@ -9,9 +14,9 @@ import com.androidstudydata.java.LogUtils;
  */
 public class AnimaTest {
 
-    private void valueAnimaTest() {
+    public void valueAnimaTest() {
 
-        ValueAnimator animator = ValueAnimator.ofFloat(0, 100);
+        ValueAnimator animator = ValueAnimator.ofFloat(0, 10);
         //设置动画时长
         animator.setDuration(300);
         //设置动画执行延迟时间
@@ -25,7 +30,7 @@ public class AnimaTest {
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                float currentValue = animation.getAnimatedFraction();
+                float currentValue = (float) animation.getAnimatedValue();
                 LogUtils.d("当前动画值=" + currentValue);
 
                 //改变view的属性值
@@ -38,5 +43,39 @@ public class AnimaTest {
         //开始动画
         animator.start();
 
+
+
+    }
+
+    //ValueAnimator的ofObject方法的使用
+    public void ofObjectBtn(Context context, final Button button) {
+
+        //起初点
+        Point startPoint = new Point(0, 0);
+        //终点
+        Point endPoint = new Point(Utils.getScreenWidth(context)-220, Utils.getScreenHeight(context)-200);
+
+        ValueAnimator animator=ValueAnimator.ofObject(new PointEvaluator(),startPoint,endPoint);
+        animator.setDuration(5000);
+        animator.setStartDelay(300);
+
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+
+                Point currentPoint= (Point) animation.getAnimatedValue();
+                LogUtils.d("变化的值="+currentPoint.getX()+"///"+currentPoint.getY());
+                FrameLayout.LayoutParams layoutParams= new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                //改变btn的属性
+                layoutParams.topMargin= (int) currentPoint.getY();
+                layoutParams.leftMargin= (int) currentPoint.getX();
+                button.setLayoutParams(layoutParams);
+                button.requestLayout();
+            }
+        });
+
+        animator.start();
+
+        
     }
 }
