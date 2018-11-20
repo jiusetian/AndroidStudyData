@@ -1,4 +1,4 @@
-package com.androidstudydata.java;
+package com.androidstudydata;
 
 import android.util.Log;
 

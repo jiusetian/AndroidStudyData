@@ -1,6 +1,6 @@
 package com.androidstudydata.thread;
 
-import com.androidstudydata.java.LogUtils;
+import com.androidstudydata.LogUtils;
 
 import java.util.concurrent.TimeUnit;
 

@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.androidstudydata.Utils;
-import com.androidstudydata.java.LogUtils;
+import com.androidstudydata.LogUtils;
 
 /**
  * Created by XR_liu on 2018/11/14.
