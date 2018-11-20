@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.androidstudydata.propertyanima.AnimaActivity;
+import com.androidstudydata.thread.SynchronizedBlocked;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
 
@@ -45,6 +46,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startAct(AnimaActivity.class);
+            }
+        });
+
+        //线程操作
+        findViewById(R.id.thead).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    //InterruputSleepThread3.main();
+                    SynchronizedBlocked.main();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

@@ -6,7 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".propertyanima.AnimaActivity">
 
+
     <Button
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="100dp"
         android:id="@+id/value_anima"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
