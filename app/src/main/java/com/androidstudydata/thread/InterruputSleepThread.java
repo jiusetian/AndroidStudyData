@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
  * Created by XR_liu on 2018/11/20.
  * 线程中断测试，一个正在执行的线程，如果调用了interrupt，会抛出错误，然后结束线程
  */
-public class InterruputSleepThread3 {
+public class InterruputSleepThread {
 
     public static void main() throws InterruptedException {
         Thread t1 = new Thread() {
