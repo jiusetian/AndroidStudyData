@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.androidstudydata.propertyanima.AnimaActivity;
-import com.androidstudydata.thread.SynchronizedBlocked;
+import com.androidstudydata.thread.MutilThreadExecute;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
 
@@ -55,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     //InterruputSleepThread3.main();
-                    SynchronizedBlocked.main();
-                } catch (InterruptedException e) {
+                    //SynchronizedBlocked.main();
+                    MutilThreadExecute.threadsExecute();
+                    //new SyncCodeBlock().startTheads();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
