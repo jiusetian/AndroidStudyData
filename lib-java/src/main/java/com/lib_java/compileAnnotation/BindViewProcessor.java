@@ -87,10 +87,10 @@ public class BindViewProcessor extends AbstractProcessor{
                 codeCreater = new CodeCreater(elementUtils, classElement);
                 codeCreaterMap.put(fqClassName, codeCreater);
             }
-            //接下来，会将与该类对应的且被@BindView声明的VariableElement加入到ProxyInfo中去，key为我们声明时填写的id，即View的id
+            //接下来，会将与该类对应的且被@BindView声明的VariableElement加入到codeCreater中去，key为我们声明时填写的id，即View的id
             BindView bindAnnotation = variableElement.getAnnotation(BindView.class); //获取对应的注解对象
             int id = bindAnnotation.value();
-            //如果这个字段属于某个类，这里就会保存到同一个proxyInfo中，因为不同类的时候，这里的proxyInfo是不同的
+            //如果这个字段属于某个类，这里就会保存到同一个codeCreater中，因为不同类的时候，这里的codeCreater是不同的
             codeCreater.injectVariables.put(id , variableElement);
         }
 

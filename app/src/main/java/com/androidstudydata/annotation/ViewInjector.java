@@ -7,9 +7,6 @@ import android.view.View;
 import com.lib_java.compileAnnotation.ViewInject;
 
 
-/**
- * Created by zhy on 16/4/22.
- */
 public class ViewInjector
 {
     private static final String SUFFIX = "$$ViewInject";

@@ -61,13 +61,13 @@ public class CodeCreater {
             VariableElement element = injectVariables.get(id); //id对应的变量
             String name = element.getSimpleName().toString(); //变量名
             String type = element.asType().toString(); //变量类型
-            //host代表使用注解的那个类的全限定名，所以host.name代表被注解的那个变量，其实也就是对应的activity对象
-            builder.append("   if(viewOwner instanceof android.app.Activity){\n"); //如果source是activity
+            //master代表使用注解的那个类的全限定名，所以master.name代表被注解的那个变量，其实也就是对应的activity对象
+            builder.append("   if(viewOwner instanceof android.app.Activity){\n"); //如果master是activity
             builder.append("      master." + name).append(" = ");
             builder.append("(" + type + ")(((android.app.Activity)viewOwner).findViewById( " + id + "));\n");
             builder.append("\n   }else{\n");
             builder.append("      master." + name).append(" = ");
-            builder.append("(" + type + ")(((android.view.View)viewOwner).findViewById( " + id + "));\n"); //source是View对象
+            builder.append("(" + type + ")(((android.view.View)viewOwner).findViewById( " + id + "));\n"); //master是View对象
             builder.append("\n    }\n");
 
         }
