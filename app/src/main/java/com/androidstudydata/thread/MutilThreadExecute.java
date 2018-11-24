@@ -18,7 +18,7 @@ public class MutilThreadExecute {
             public void run() {
                 while (true) {
                     try {
-                        TimeUnit.SECONDS.sleep(10);
+                        TimeUnit.SECONDS.sleep(2);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -46,6 +46,7 @@ public class MutilThreadExecute {
         });
         thread02.setPriority(1);
         thread02.start();
+
 
         //线程03
 //        new Thread(new Runnable() {

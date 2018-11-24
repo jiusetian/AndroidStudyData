@@ -10,30 +10,36 @@ import java.util.concurrent.TimeUnit;
  */
 public class InterruputSleepThread {
 
+
     public static void main() throws InterruptedException {
-        Thread t1 = new Thread() {
+
+        final Thread t1 = new Thread() {
             @Override
             public void run() {
                 //while在try中，通过异常中断就可以退出run循环
                 try {
-                    while (true) {
+                    while (true) { //判断是否被中断
                         //当前线程处于阻塞状态，异常必须捕捉处理，无法往外抛出
-                        TimeUnit.SECONDS.sleep(2);
-                        LogUtils.d("线程正在执行");
+                        //此时线程进入while循环，还没进入休眠的阻塞状态，所以此时中断线程的话，中断状态是true的，所以此时可以跳出while循环，进而可以
+                        //结束线程
+                        if (this.isInterrupted()) {
+                            LogUtils.d("线程被中断");
+                            break;
+                        }
                     }
+                    TimeUnit.SECONDS.sleep(2);
+                    LogUtils.d("线程正在执行");
+
                 } catch (InterruptedException e) {
-                    System.out.println("Interruted When Sleep");
-                    boolean interrupt = this.isInterrupted();
-                    //中断状态被复位
-                    System.out.println("interrupt:" + interrupt);
-                    //如果调用了这里，那么线程就执行完毕了
+                    e.printStackTrace();
                 }
             }
         };
         t1.start();
-        TimeUnit.SECONDS.sleep(6);
-        //中断处于阻塞状态的线程
+        TimeUnit.SECONDS.sleep(2);
+        //中断线程
         t1.interrupt();
+        LogUtils.d("线程是否被中断" + t1.isInterrupted());
 
         /**
          * 输出结果:

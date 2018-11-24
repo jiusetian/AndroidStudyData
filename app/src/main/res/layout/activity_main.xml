@@ -36,4 +36,19 @@
         android:layout_height="wrap_content"
         android:text="线程操作"
         />
+
+    <Button
+        android:id="@+id/annotation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注解操作"
+        />
+
+    <Button
+        android:id="@+id/bindView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自动绑定view"
+        />
+
 </LinearLayout>

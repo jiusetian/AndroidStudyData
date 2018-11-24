@@ -15,7 +15,7 @@ public class SyncCodeBlock {
     public void syncTask() {
 
         //同步代码库
-        synchronized (lock) {
+        synchronized (this) {
             while (true) {
                 try {
 

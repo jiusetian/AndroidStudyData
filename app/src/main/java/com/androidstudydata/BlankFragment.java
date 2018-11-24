@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 public class BlankFragment extends Fragment {
 
 
+    @Deprecated
     public BlankFragment() {
         // Required empty public constructor
     }
