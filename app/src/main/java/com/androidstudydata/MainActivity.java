@@ -13,9 +13,11 @@ import com.androidstudydata.annotation.ViewInjector;
 import com.androidstudydata.annotation.runtimeanno.AnnoUtils;
 import com.androidstudydata.annotation.runtimeanno.Person;
 import com.androidstudydata.propertyanima.AnimaActivity;
-import com.androidstudydata.thread.InterruputSleepThread;
+import com.androidstudydata.reflect.ReflectDemo;
+import com.androidstudydata.thread.CaculateSync;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
+import com.genericity.Erasure;
 import com.lib_java.compileAnnotation.BindView;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,14 +63,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.thead).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    InterruputSleepThread.main();
-                    //SynchronizedBlocked.main();
-                    //MutilThreadExecute.threadsExecute();
-                    //new SyncCodeBlock().startTheads();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                //CaculateSync.main();
+                new CaculateSync().test();
             }
         });
 
@@ -86,6 +82,30 @@ public class MainActivity extends AppCompatActivity {
         });
 
         BindBtn.setText("成功绑定了view");
+
+        //泛型
+        findViewById(R.id.genericity).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Erasure<String> erasure = new Erasure<>("刘兴荣");
+                Class clazz = erasure.getErasure().getClass();
+                LogUtils.d("泛型的类型="+clazz.getSimpleName());
+            }
+        });
+
+        //反射
+        findViewById(R.id.reflect).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    ReflectDemo.test();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
 
     }
 

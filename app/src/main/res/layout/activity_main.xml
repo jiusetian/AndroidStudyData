@@ -51,4 +51,18 @@
         android:text="自动绑定view"
         />
 
+    <Button
+        android:id="@+id/genericity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="泛型"
+        />
+
+    <Button
+        android:id="@+id/reflect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="反射"
+        />
+
 </LinearLayout>
