@@ -17,7 +17,7 @@ import com.androidstudydata.reflect.ReflectDemo;
 import com.androidstudydata.thread.CaculateSync;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
-import com.genericity.Erasure;
+import com.androidstudydata.genericity.Erasure;
 import com.lib_java.compileAnnotation.BindView;
 
 public class MainActivity extends AppCompatActivity {

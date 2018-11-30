@@ -7,10 +7,7 @@ public class Sync {
 
     private static int i = 0;
 
-    private void add() {
-        synchronized (this) {
-            i++;
-        }
-
+    private synchronized void add() {
+        i++;
     }
 }

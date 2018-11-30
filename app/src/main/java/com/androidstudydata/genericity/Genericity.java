@@ -1,4 +1,4 @@
-package com.genericity;
+package com.androidstudydata.genericity;
 
 /**
  * Created by XR_liu on 2018/11/25.
