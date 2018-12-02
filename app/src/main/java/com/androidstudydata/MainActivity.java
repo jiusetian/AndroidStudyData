@@ -12,12 +12,13 @@ import android.widget.Button;
 import com.androidstudydata.annotation.ViewInjector;
 import com.androidstudydata.annotation.runtimeanno.AnnoUtils;
 import com.androidstudydata.annotation.runtimeanno.Person;
+import com.androidstudydata.genericity.Erasure;
+import com.androidstudydata.handler.HandlerDemo;
 import com.androidstudydata.propertyanima.AnimaActivity;
 import com.androidstudydata.reflect.ReflectDemo;
 import com.androidstudydata.thread.CaculateSync;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
-import com.androidstudydata.genericity.Erasure;
 import com.lib_java.compileAnnotation.BindView;
 
 public class MainActivity extends AppCompatActivity {
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //CaculateSync.main();
                 new CaculateSync().test();
+
             }
         });
 
@@ -103,6 +105,17 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+        });
+
+        //消息机制
+        findViewById(R.id.handler).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //new ThreadLocalDemo().test();
+                new HandlerDemo().sendMsg();
+                new HandlerDemo().post();
+
             }
         });
 

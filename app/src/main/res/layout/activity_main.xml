@@ -65,4 +65,11 @@
         android:text="反射"
         />
 
+    <Button
+        android:id="@+id/handler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="消息机制"
+        />
+
 </LinearLayout>
