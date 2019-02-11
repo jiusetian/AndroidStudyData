@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.androidstudydata">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,9 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ConstraintLayoutActivity" />
-        <activity android:name=".CoordinatorLayoutActivity" />
-        <activity android:name=".propertyanima.AnimaActivity"></activity>
+        <activity android:name="view.ConstraintLayoutActivity" />
+        <activity android:name="view.CoordinatorLayoutActivity" />
+        <activity android:name=".EventDispatchActivity" />
+        <activity android:name=".propertyanima.AnimaActivity" />
+        <activity android:name=".ViewLocaActivity" />
+        <activity android:name=".ViewActivity" />
+        <activity android:name=".memory.MemoryActivity"></activity>
     </application>
 
 </manifest>

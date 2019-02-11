@@ -1,5 +1,7 @@
 package com.androidstudydata.propertyanima;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -15,9 +17,13 @@ public class AnimaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_anima);
 
         btn=findViewById(R.id.value_anima);
+        AnimatorSet animatorSet=new AnimatorSet();
+        animatorSet.playTogether(ObjectAnimator.ofFloat(btn,"translationY",-100,30,-20,0));
+        animatorSet.setDuration(2000);
+        animatorSet.start();
 
-        AnimaTest animaTest=new AnimaTest();
-        animaTest.ofObjectBtn(this,btn);
+//        AnimaTest animaTest=new AnimaTest();
+//        animaTest.ofObjectBtn(this,btn);
 
 //        findViewById(R.id.value_anima).setOnClickListener(new View.OnClickListener() {
 //            @Override

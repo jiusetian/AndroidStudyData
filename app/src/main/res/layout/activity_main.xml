@@ -1,75 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/contraitlayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ContraintLayout学习"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/coordinatorlayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="coordinatorlayout学习"
-        />
+        <Button
+            android:id="@+id/dispatch_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DispatchView学习" />
 
-    <Button
-        android:id="@+id/anima"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="动画学习"
-        />
+        <Button
+            android:id="@+id/contraitlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ContraintLayout学习" />
 
-    <Button
-        android:id="@+id/thead"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="线程操作"
-        />
+        <Button
+            android:id="@+id/coordinatorlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="coordinatorlayout学习" />
 
-    <Button
-        android:id="@+id/annotation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="注解操作"
-        />
+        <Button
+            android:id="@+id/view_loca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View位置测试" />
 
-    <Button
-        android:id="@+id/bindView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="自动绑定view"
-        />
+        <Button
+            android:id="@+id/anima"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="动画学习" />
 
-    <Button
-        android:id="@+id/genericity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="泛型"
-        />
+        <Button
+            android:id="@+id/thead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="线程操作" />
 
-    <Button
-        android:id="@+id/reflect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="反射"
-        />
+        <Button
+            android:id="@+id/annotation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="注解操作" />
 
-    <Button
-        android:id="@+id/handler"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="消息机制"
-        />
+        <Button
+            android:id="@+id/bindView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自动绑定view" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/genericity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="泛型" />
+
+        <Button
+            android:id="@+id/reflect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="反射" />
+
+        <Button
+            android:id="@+id/handler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="消息机制" />
+
+        <Button
+            android:id="@+id/debug"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="断点调试" />
+
+        <Button
+            android:id="@+id/view_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View测试" />
+
+        <Button
+            android:id="@+id/matrix_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Matrix测试" />
+
+        <Button
+            android:id="@+id/memory_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="内存分析测试" />
+    </LinearLayout>
+
+
+</ScrollView>

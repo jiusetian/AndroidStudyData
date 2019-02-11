@@ -2,6 +2,7 @@ package com.androidstudydata.handler;
 
 
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 
 import com.androidstudydata.LogUtils;
@@ -51,6 +52,19 @@ public class HandlerDemo {
         }).start();
 
 
+    }
+
+    Handler handler3;
+    public void createHandler(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //在子线程中创建handler对象,在子线程中不能在looper创建之前创建handler实例
+                Looper.prepare();
+                //在子线程中创建一个handler对象，此时这个handler对象中持有的looper实例是保存在当前线程的threadlocalmap中的
+                handler3=new Handler();
+            }
+        }).start();
     }
 
     public void post() {

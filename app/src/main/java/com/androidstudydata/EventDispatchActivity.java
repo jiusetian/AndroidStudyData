@@ -1,9 +1,8 @@
 package com.androidstudydata;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 
 /**
@@ -32,7 +31,7 @@ import android.view.View;
  *  dispatchTouchEvent方法处理事件的方式不一样，view接收到事件以后，会根据view的相关设置，先判断有没有ontouchlistener，有的话
  *  就调用处理，如果消费了事件就返回true，否则调用onTouchEvent方法，在onTouchEvent方法中主要看onclicklistener设置，判断要不要
  *  消费事件。所以说当ViewGroup没有子view消费事件的时候，就会将事件传递给其父类的dispatchTouchEvent方法处理。如果ViewGroup有子
- *  view消费事件，而且这个子view是不是ViewGroup就是一个view，那么处理逻辑跟ViewGroup父类view处理事件的逻辑是一样的。
+ *  view消费事件，而且这个子view不是ViewGroup就是一个view，那么处理逻辑跟ViewGroup父类view处理事件的逻辑是一样的。
  */
 public class EventDispatchActivity extends AppCompatActivity {
 
@@ -41,6 +40,7 @@ public class EventDispatchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_dispatch);
+        ViewServer.get(this).addWindow(this);
         
         findViewById(R.id.parent_view).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,13 +49,13 @@ public class EventDispatchActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.parent_view).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Log.d(TAG, "onTouch: 调用了父view的onTouch方法");
-                return true;
-            }
-        });
+//        findViewById(R.id.parent_view).setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                Log.d(TAG, "onTouch: 调用了父view的onTouch方法");
+//                return true;
+//            }
+//        });
 
 
 //        findViewById(R.id.child_view).setOnClickListener(new View.OnClickListener() {
@@ -64,5 +64,17 @@ public class EventDispatchActivity extends AppCompatActivity {
 //                Log.d(TAG, "onClick: 子view接收了点击事件");
 //            }
 //        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ViewServer.get(this).setFocusedWindow(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ViewServer.get(this).removeWindow(this);
     }
 }
