@@ -2,6 +2,7 @@ package com.androidstudydata.thread;
 
 import com.androidstudydata.LogUtils;
 
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -10,6 +11,32 @@ import java.util.concurrent.TimeUnit;
  */
 public class InterruputSleepThread {
 
+    //保存
+    final LinkedBlockingDeque<String> queue = new LinkedBlockingDeque<>();
+    Thread thread01;
+
+    public void startThead() {
+        thread01 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                LogUtils.d("开始执行线程");
+                try {
+                    queue.take();
+                    LogUtils.d("take取到了元素");
+                } catch (InterruptedException e) {
+                    LogUtils.d("中断异常");
+                }
+
+            }
+        });
+
+        thread01.start();
+    }
+
+    //中断线程
+    public void interruput() {
+        thread01.interrupt();
+    }
 
     public static void main() throws InterruptedException {
 

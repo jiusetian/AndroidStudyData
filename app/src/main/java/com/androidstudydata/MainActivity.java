@@ -19,7 +19,7 @@ import com.androidstudydata.matrix.MatrixTest;
 import com.androidstudydata.memory.MemoryActivity;
 import com.androidstudydata.propertyanima.AnimaActivity;
 import com.androidstudydata.reflect.ReflectDemo;
-import com.androidstudydata.thread.CaculateSync;
+import com.androidstudydata.thread.InterruputSleepThread;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
 import com.lib_java.compileAnnotation.BindView;
@@ -84,13 +84,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        final InterruputSleepThread[] thread = {null};
         //线程操作
         findViewById(R.id.thead).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //CaculateSync.main();
-                new CaculateSync().test();
-
+                //new CaculateSync().test();
+                if (thread[0] == null) {
+                    thread[0] =new InterruputSleepThread();
+                    thread[0].startThead();
+                }else {
+                    thread[0].interruput();
+                }
             }
         });
 
@@ -170,10 +177,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.matrix_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MatrixTest matrixTest=new MatrixTest();
+                MatrixTest matrixTest = new MatrixTest();
                 //matrixTest.getValues();
                 //matrixTest.setContact();
-               // matrixTest.mapPoints3();
+                // matrixTest.mapPoints3();
                 //matrixTest.mapRadius();
                 matrixTest.mapRect();
             }
@@ -197,12 +204,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       // ViewServer.get(this).setFocusedWindow(this);
+        // ViewServer.get(this).setFocusedWindow(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       // ViewServer.get(this).removeWindow(this);
+        // ViewServer.get(this).removeWindow(this);
     }
 }

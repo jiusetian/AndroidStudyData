@@ -31,3 +31,5 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
+println "In 主工程中, gradle id is " + gradle.hashCode()
+
