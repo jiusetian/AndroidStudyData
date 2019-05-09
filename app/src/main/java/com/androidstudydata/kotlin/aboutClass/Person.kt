@@ -3,7 +3,7 @@ package com.androidstudydata.kotlin.aboutClass
 /**
  * Author：Alex
  * Date：2019/5/9
- * Note：
+ * Note：测试改变git用户
  */
 class Person {
 
