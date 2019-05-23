@@ -22,6 +22,10 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven {
+            // 配置仓库地址（获取方式见上文）
+            url "http://localhost:8081/repository/lxrmaven/"
+        }
     }
 }
 

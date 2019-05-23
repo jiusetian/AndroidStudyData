@@ -17,4 +17,6 @@ class Person2 {
     fun test(){
         person.method()
     }
+
+    //扩展函数
 }

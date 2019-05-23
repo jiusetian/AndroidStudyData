@@ -31,6 +31,23 @@ class KotlinActivity : AppCompatActivity() {
 
     fun runoobTest() {
         //这里调用的是次构造函数
-        var runoob: Runoob = Runoob("菜鸟教程",1000)
+        var runoob: Runoob = Runoob("菜鸟教程", 1000)
+        //调用了扩展函数
+        var p: Person = Person();
+        p.Print()
     }
+
+    //创建Person类的扩展函数
+    fun Person.Print() {
+        println("我是person的扩展函数")
+    }
+
+    //为MutableList 扩展一个交换函数
+    fun MutableList<Int>.swap(index1: Int, index2: Int) {
+        val temp = this[index1] //this关键字代表接收者对象
+        this[index1] = this[index2]
+        this[index2] = temp
+    }
+
+
 }

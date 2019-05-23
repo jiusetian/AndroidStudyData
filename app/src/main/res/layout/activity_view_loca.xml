@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     tools:context="com.androidstudydata.ViewLocaActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_container"
+        ></FrameLayout>
+
     <Button
         android:id="@+id/btn"
         android:layout_width="100dp"

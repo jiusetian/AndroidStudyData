@@ -31,3 +31,26 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
+apply plugin: 'maven'
+
+uploadArchives {
+    configuration = configurations.archives
+    repositories.mavenDeployer {
+        /*远程仓库的地址，貌似有具体ip的基本上都是建在局域网的仓库*/
+        repository(url: "http://localhost:8081/repository/lxrmaven/") {/*仓库地址*/
+            authentication(userName: "admin",/*用户名*/
+                    password: "lxr07533452710")/*密码*/
+        }
+
+        pom.project {
+            name 'test-library'    /*项目的名称*/
+            packaging 'aar'         /*要提交文件的类型*/
+            description '测试组件定义'     /*描述*/
+            url "http://localhost:8081/repository/lxrmaven/"/*仓库地址*/
+            groupId "com.lxr.maven"  /*注册sonatype账号时有填，这里是域名反转+项目名*/
+            artifactId "test"
+            version '1.0.0'
+        }
+    }
+}

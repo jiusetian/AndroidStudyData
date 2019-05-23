@@ -37,5 +37,8 @@ public class ViewLocaActivity extends AppCompatActivity {
                 LogUtils.d("按钮02的位置="+loca[0]+"////"+loca[1]);
             }
         });
+
+        BlankFragment blankFragment=new BlankFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,blankFragment).commit();
     }
 }
