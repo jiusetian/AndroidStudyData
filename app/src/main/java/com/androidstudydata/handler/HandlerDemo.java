@@ -54,15 +54,31 @@ public class HandlerDemo {
 
     }
 
+    /**
+     * 子线程的handler
+     */
     Handler handler3;
-    public void createHandler(){
+    public void createHandler3(){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 //在子线程中创建handler对象,在子线程中不能在looper创建之前创建handler实例
                 Looper.prepare();
                 //在子线程中创建一个handler对象，此时这个handler对象中持有的looper实例是保存在当前线程的threadlocalmap中的
-                handler3=new Handler();
+                handler3=new Handler(){
+                    @Override
+                    public void handleMessage(Message msg) {
+                        super.handleMessage(msg);
+                        LogUtils.d("handler3收到msg");
+                    }
+                };
+
+                handler3.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        LogUtils.d("handler3的post执行");
+                    }
+                },2000);
             }
         }).start();
     }
@@ -75,5 +91,13 @@ public class HandlerDemo {
             }
         });
     }
+
+    /**
+     * 子线程handler3的post测试,经测试子线程的handler对象不能执行post里面的runnable
+     */
+    public void handler3Post(){
+        createHandler3();
+    }
+
 
 }

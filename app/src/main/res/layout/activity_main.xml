@@ -97,10 +97,16 @@
             android:text="Matrix测试" />
 
         <Button
-            android:id="@+id/memory_test"
+        android:id="@+id/memory_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="内存分析测试" />
+
+        <Button
+            android:id="@+id/json_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="内存分析测试" />
+            android:text="json测试" />
     </LinearLayout>
 
 

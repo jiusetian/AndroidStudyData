@@ -15,6 +15,8 @@ import com.androidstudydata.annotation.runtimeanno.Person;
 import com.androidstudydata.debug.Debug;
 import com.androidstudydata.genericity.Erasure;
 import com.androidstudydata.handler.HandlerDemo;
+import com.androidstudydata.json.JsonUtil;
+import com.androidstudydata.json.MyData;
 import com.androidstudydata.matrix.MatrixTest;
 import com.androidstudydata.memory.MemoryActivity;
 import com.androidstudydata.propertyanima.AnimaActivity;
@@ -22,6 +24,7 @@ import com.androidstudydata.reflect.ReflectDemo;
 import com.androidstudydata.thread.InterruputSleepThread;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
+import com.google.gson.JsonSyntaxException;
 import com.lib_java.compileAnnotation.BindView;
 
 public class MainActivity extends AppCompatActivity {
@@ -144,9 +147,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //new ThreadLocalDemo().test();
-                new HandlerDemo().sendMsg();
-                new HandlerDemo().post();
-                new HandlerDemo().createHandler();
+//                new HandlerDemo().sendMsg();
+           //     new HandlerDemo().post();
+//                new HandlerDemo().createHandler3();
+                new HandlerDemo().handler3Post();
             }
         });
 
@@ -190,6 +194,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startAct(MemoryActivity.class);
+            }
+        });
+
+        //json测试
+        findViewById(R.id.json_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    MyData myData= (MyData) JsonUtil.jsonStringToObject("{\"ID\":1,\"Name\":\"hpy\",\"Age\":18}", MyData.class);
+                    LogUtils.d("ID是"+myData.getID());
+                } catch (JsonSyntaxException e) {
+                    LogUtils.d("有哦异常");
+                    e.printStackTrace();
+                }
             }
         });
 
