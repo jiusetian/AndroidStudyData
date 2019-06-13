@@ -73,12 +73,16 @@ public class HandlerDemo {
                     }
                 };
 
-                handler3.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        LogUtils.d("handler3的post执行");
-                    }
-                },2000);
+                try {
+                    handler3.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            LogUtils.d("handler3的post执行");
+                        }
+                    },2000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
     }

@@ -17,12 +17,28 @@ class Runoob(name: String) {
         println("alex的排名：$alex")
     }
 
+    /**
+     * 另外一个次构造函数
+     */
+    constructor(name: String,alex: Int, weigth:Int) : this(name,alex) {
+
+    }
+
+
     init {
         println("初始化了网站名$name")
     }
 
     fun printTest() {
         println("我是类函数")
+    }
+
+    /**
+     * 测试函数
+     */
+    fun main(){
+        //其实Runoob有两个构造函数，一个是主构造函数，一个是次构造函数
+        val runoob=Runoob("我的名字",3333);
     }
 
 }

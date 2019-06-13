@@ -17,6 +17,8 @@ import com.androidstudydata.genericity.Erasure;
 import com.androidstudydata.handler.HandlerDemo;
 import com.androidstudydata.json.JsonUtil;
 import com.androidstudydata.json.MyData;
+import com.androidstudydata.kotlin.ReturnAndSkip;
+import com.androidstudydata.map.MapTest;
 import com.androidstudydata.matrix.MatrixTest;
 import com.androidstudydata.memory.MemoryActivity;
 import com.androidstudydata.propertyanima.AnimaActivity;
@@ -96,9 +98,9 @@ public class MainActivity extends AppCompatActivity {
                 //CaculateSync.main();
                 //new CaculateSync().test();
                 if (thread[0] == null) {
-                    thread[0] =new InterruputSleepThread();
+                    thread[0] = new InterruputSleepThread();
                     thread[0].startThead();
-                }else {
+                } else {
                     thread[0].interruput();
                 }
             }
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //new ThreadLocalDemo().test();
 //                new HandlerDemo().sendMsg();
-           //     new HandlerDemo().post();
+                //     new HandlerDemo().post();
 //                new HandlerDemo().createHandler3();
                 new HandlerDemo().handler3Post();
             }
@@ -178,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //matrix测试
         findViewById(R.id.matrix_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //内存分析测试
         findViewById(R.id.memory_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,12 +207,29 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 try {
-                    MyData myData= (MyData) JsonUtil.jsonStringToObject("{\"ID\":1,\"Name\":\"hpy\",\"Age\":18}", MyData.class);
-                    LogUtils.d("ID是"+myData.getID());
+                    MyData myData = (MyData) JsonUtil.jsonStringToObject("{\"ID\":1,\"Name\":\"hpy\",\"Age\":18}", MyData.class);
+                    LogUtils.d("ID是" + myData.getID());
                 } catch (JsonSyntaxException e) {
-                    LogUtils.d("有哦异常");
+                    LogUtils.d("有异常");
                     e.printStackTrace();
                 }
+            }
+        });
+
+        //map测试
+        findViewById(R.id.map_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MapTest().test();
+            }
+        });
+
+        //kotlin测试
+        findViewById(R.id.kotlin_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReturnAndSkip returnAndSkip=new ReturnAndSkip();
+                returnAndSkip.label();
             }
         });
 

@@ -3,7 +3,7 @@ package com.androidstudydata.kotlin
 /**
  * Author：Alex
  * Date：2019/5/9
- * Note：
+ * Note：接口
  */
 
 interface A {

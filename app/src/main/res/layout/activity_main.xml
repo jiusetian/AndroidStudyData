@@ -107,6 +107,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="json测试" />
+
+        <Button
+            android:id="@+id/map_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Map测试" />
+
+        <Button
+            android:id="@+id/kotlin_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kotlin测试" />
+
     </LinearLayout>
 
 

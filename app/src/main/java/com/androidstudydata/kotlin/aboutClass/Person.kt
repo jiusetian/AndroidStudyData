@@ -27,7 +27,7 @@ class Person {
         private set
 
     //成员方法
-    fun method(){
+     fun method(){
 
     }
 
