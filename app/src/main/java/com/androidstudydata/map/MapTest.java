@@ -1,9 +1,13 @@
 package com.androidstudydata.map;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import com.androidstudydata.LogUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 /**
  * Author：Alex
@@ -14,6 +18,7 @@ public class MapTest {
 
     Map<Info,String> map=new HashMap<>();
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void test(){
         Info info=new Info("lxr",80);
         map.put(info,"lxrong");
@@ -21,6 +26,13 @@ public class MapTest {
 
         LogUtils.d("测试="+map.get(info1));
         LogUtils.d("测试2="+map.get(info));
+
+        map.forEach(new BiConsumer<Info, String>() {
+            @Override
+            public void accept(Info info, String s) {
+
+            }
+        });
     }
 
 

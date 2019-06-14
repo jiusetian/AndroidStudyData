@@ -17,7 +17,7 @@ import com.androidstudydata.genericity.Erasure;
 import com.androidstudydata.handler.HandlerDemo;
 import com.androidstudydata.json.JsonUtil;
 import com.androidstudydata.json.MyData;
-import com.androidstudydata.kotlin.ReturnAndSkip;
+import com.androidstudydata.kotlin.Lanbuda;
 import com.androidstudydata.map.MapTest;
 import com.androidstudydata.matrix.MatrixTest;
 import com.androidstudydata.memory.MemoryActivity;
@@ -228,8 +228,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.kotlin_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ReturnAndSkip returnAndSkip=new ReturnAndSkip();
-                returnAndSkip.label();
+//                ReturnAndSkip returnAndSkip=new ReturnAndSkip();
+//                returnAndSkip.label();
+
+//                DelegateClassKt delegateClassKt=new DelegateClassKt();
+//                delegateClassKt.main2();
+                //DelegateClassKt.main2();
+                Lanbuda lanbuda=new Lanbuda();
+                lanbuda.mainLbd();
             }
         });
 

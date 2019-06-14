@@ -37,6 +37,7 @@ public class Genericity {
         //list.add(number); // 错误: 不兼容的类型: Number无法转换为CAP#1
         list.clear(); // OK
         list.remove(0); // OK
+
     }
 
     /**
@@ -52,6 +53,8 @@ public class Genericity {
         list=new ArrayList<Object>();
         //下面是不正确的，因为Double是Number的下面的类，超过了Number为下限的规定
         //list=new ArrayList<Double>();
+        //只要添加Number的子类类型即可
+        list.add(3);
 
         Object o=list.get(2); //ok的
         //Double添加进去是向上转型

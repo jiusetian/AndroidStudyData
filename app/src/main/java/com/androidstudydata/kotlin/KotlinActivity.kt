@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import com.androidstudydata.R
 import com.androidstudydata.kotlin.aboutClass.Person
 import com.androidstudydata.kotlin.aboutClass.Runoob
+import java.util.concurrent.locks.Lock
 
 class KotlinActivity : AppCompatActivity() {
 
@@ -69,7 +70,7 @@ class KotlinActivity : AppCompatActivity() {
         /*out 是一个上限通配符，Number 是元素的上限，所以Float是可以的，但是Any不行*/
         var l: List<out Number>
 
-        l= ArrayList<Float>()
+        l = ArrayList<Float>()
 
     }
 
@@ -89,25 +90,24 @@ class KotlinActivity : AppCompatActivity() {
     /**
      * 参数协变测试方法
      */
-    fun xiebian(){
+    fun xiebian() {
 
         var strCo: Runoob1<String> = Runoob1("a")
+        //这里的上限是Any，所以参数string 是可以的
         var anyCo: Runoob1<Any> = Runoob1<Any>("b")
         anyCo = strCo
         println(anyCo.foo())   // 输出 a
-
     }
+
 
     /**
      * 参数逆变测试
      */
-    fun nibian(){
-        var strDCo = Runoob2("a")
+    fun nibian() {
+        var strDCo: Runoob2<Any> = Runoob2("ddd")
         var anyDCo = Runoob2<Any>("b")
-
         strDCo = anyDCo
     }
-
 
 
     /**
@@ -118,6 +118,34 @@ class KotlinActivity : AppCompatActivity() {
      */
     fun <T> Collection<T>.plus(elements: Array<out T>): List<T> {
         return listOf(elements.get(3))
+    }
+
+    /**
+     * 枚举
+     */
+    enum class ProtocolState {
+        WAITING {
+            override fun signal() = TALKING
+        },
+
+        TALKING {
+            override fun signal() = WAITING
+        };
+
+        //这个是枚举的抽象方法
+        abstract fun signal(): ProtocolState
+    }
+
+    /**
+     * 第二个参数是一个函数然后返回一个T值
+     */
+    fun <T> check(lock: Lock, body: () -> T): T {
+        lock.lock()
+        try {
+            return body()
+        } finally {
+            lock.unlock()
+        }
     }
 
 
