@@ -1,4 +1,4 @@
-package com.androidstudydata.map;
+package com.androidstudydata.javamap;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;

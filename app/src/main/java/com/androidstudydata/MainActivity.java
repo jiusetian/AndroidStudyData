@@ -3,7 +3,9 @@ package com.androidstudydata;
 import android.animation.FloatEvaluator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -13,21 +15,28 @@ import com.androidstudydata.annotation.ViewInjector;
 import com.androidstudydata.annotation.runtimeanno.AnnoUtils;
 import com.androidstudydata.annotation.runtimeanno.Person;
 import com.androidstudydata.debug.Debug;
-import com.androidstudydata.genericity.Erasure;
+import com.androidstudydata.genericity.Genericity;
+import com.androidstudydata.genericity.SubGenericty;
 import com.androidstudydata.handler.HandlerDemo;
+import com.androidstudydata.javamap.MapTest;
+import com.androidstudydata.json.BaseReceiver;
+import com.androidstudydata.json.History;
 import com.androidstudydata.json.JsonUtil;
-import com.androidstudydata.json.MyData;
-import com.androidstudydata.kotlin.Lanbuda;
-import com.androidstudydata.map.MapTest;
+import com.androidstudydata.kotlin.ktmap.KtMapTest;
 import com.androidstudydata.matrix.MatrixTest;
 import com.androidstudydata.memory.MemoryActivity;
 import com.androidstudydata.propertyanima.AnimaActivity;
 import com.androidstudydata.reflect.ReflectDemo;
+import com.androidstudydata.rxjava.RxJavaTest;
+import com.androidstudydata.service.ServiceTest;
 import com.androidstudydata.thread.InterruputSleepThread;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.internal.$Gson$Types;
 import com.lib_java.compileAnnotation.BindView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -125,9 +134,24 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.genericity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Erasure<String> erasure = new Erasure<>("刘兴荣");
-                Class clazz = erasure.getErasure().getClass();
-                LogUtils.d("泛型的类型=" + clazz.getSimpleName());
+//                Erasure<String> erasure = new Erasure<>("刘兴荣");
+//                Class clazz = erasure.getErasure().getClass();
+//                LogUtils.d("泛型的类型=" + clazz.getSimpleName());
+                Genericity genericity=new SubGenericty<List<String>>();
+                //Genericity genericity=new Genericity();
+                //genericity.shuzufanxing();
+                LogUtils.d("泛型="+genericity.getType()+"////"+genericity.getRawType()+"???"+Utils.findNeedType(genericity.getClass()));
+                LogUtils.d("gson泛型="+ $Gson$Types.newParameterizedTypeWithOwner(null, List.class, String.class));
+
+//                Type rawType=genericity.getRawType(); //返回List
+//                Type type=genericity.getType(); //返回List<String>
+//                if (String.class.isAssignableFrom(Utils.getClass(type, 0))){
+//                    LogUtils.d("对对对0000");
+//                }
+//                if (List.class.isAssignableFrom(Utils.getClass(rawType, 0))){
+//                    LogUtils.d("对对对");
+//                }
+
             }
         });
 
@@ -207,8 +231,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 try {
-                    MyData myData = (MyData) JsonUtil.jsonStringToObject("{\"ID\":1,\"Name\":\"hpy\",\"Age\":18}", MyData.class);
-                    LogUtils.d("ID是" + myData.getID());
+                    //MyData myData = (MyData) JsonUtil.jsonStringToObject("{\"ID\":1,\"Name\":\"hpy\",\"Age\":18}", MyData.class);
+                    BaseReceiver<List<History>> receiver= (BaseReceiver<List<History>>) JsonUtil.jsonStringToObject(JsonUtil.histroy011,BaseReceiver.class);
+                    LogUtils.d("ID是" + receiver.toString());
                 } catch (JsonSyntaxException e) {
                     LogUtils.d("有异常");
                     e.printStackTrace();
@@ -218,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
 
         //map测试
         findViewById(R.id.map_test).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 new MapTest().test();
@@ -234,10 +260,32 @@ public class MainActivity extends AppCompatActivity {
 //                DelegateClassKt delegateClassKt=new DelegateClassKt();
 //                delegateClassKt.main2();
                 //DelegateClassKt.main2();
-                Lanbuda lanbuda=new Lanbuda();
-                lanbuda.mainLbd();
+//                Lanbuda lanbuda=new Lanbuda();
+////                lanbuda.mainLbd();
+//                Xiaohong xiaohong=new Xiaohong(new XiaoMing());
+//                xiaohong.buyCoach();
+//                xiaohong.buyGucci();
+
+                new KtMapTest().test(33);
             }
         });
+
+        findViewById(R.id.service_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startService(new Intent(MainActivity.this, ServiceTest.class));
+            }
+        });
+
+        //rxjava测试
+        findViewById(R.id.rxjava_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RxJavaTest rxJavaTest=new RxJavaTest();
+                rxJavaTest.exceptionTest();
+            }
+        });
+
 
         //android.os.Debug.stopMethodTracing();
     }

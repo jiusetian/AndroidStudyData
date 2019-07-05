@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.androidstudydata.Utils;
 import com.androidstudydata.LogUtils;
+import com.androidstudydata.Utils;
 
 /**
  * Created by XR_liu on 2018/11/14.

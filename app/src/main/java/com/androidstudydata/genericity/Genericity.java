@@ -1,13 +1,33 @@
 package com.androidstudydata.genericity;
 
+import com.androidstudydata.LogUtils;
+import com.androidstudydata.Utils;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by XR_liu on 2018/11/25.
  * 泛型相关测试
  */
-public class Genericity {
+public class Genericity<T> extends IType<Erasure>{
+
+    private T t; //泛型
+
+
+    public Type getType() { //获取需要解析的泛型T类型
+        LogUtils.d("类型="+getClass().getSimpleName());
+        return Utils.findNeedClass(getClass());
+    }
+
+    public Type getRawType() { //获取需要解析的泛型T raw类型
+        return Utils.findRawType(getClass());
+    }
 
     /**
      * 上限通配符
@@ -68,6 +88,36 @@ public class Genericity {
         list.add(number); // OK
         list.clear(); // OK
         list.remove(0); // OK
+    }
+
+    private T[] mt;
+    private List<String>[] listArray;
+    private Map<String,Integer> map2;
+    private List<Map<String,Integer>> list2;
+    /**
+     * 泛型数组
+     */
+    public void shuzufanxing(){
+        try {
+            Field listField=Genericity.class.getDeclaredField("listArray");
+            Field map2Field=Genericity.class.getDeclaredField("map2");
+            Field list2Field=Genericity.class.getDeclaredField("list2");
+
+            ParameterizedType typeList2= (ParameterizedType) list2Field.getGenericType();
+            Type[] list2Field2=typeList2.getActualTypeArguments();
+            LogUtils.d("方法000="+list2Field2[0]);
+
+            ParameterizedType typeMap2= (ParameterizedType) map2Field.getGenericType();
+            Type[] typeMap2s=typeMap2.getActualTypeArguments();
+            LogUtils.d("方法="+typeMap2s[0]+"???"+typeMap2s[1]);
+
+
+            Type listType=listField.getGenericType();
+            GenericArrayType genericArrayType= (GenericArrayType) listType;
+            LogUtils.d("泛型="+genericArrayType.getGenericComponentType());
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
     }
 
 }

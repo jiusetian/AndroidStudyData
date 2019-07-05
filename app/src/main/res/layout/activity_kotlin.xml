@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".kotlin.KotlinActivity">
 
+    <TextView
+        android:id="@+id/test_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试"
+        />
+
+
 </android.support.constraint.ConstraintLayout>

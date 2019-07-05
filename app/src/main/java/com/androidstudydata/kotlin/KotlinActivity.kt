@@ -2,9 +2,11 @@ package com.androidstudydata.kotlin
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.androidstudydata.R
 import com.androidstudydata.kotlin.aboutClass.Person
 import com.androidstudydata.kotlin.aboutClass.Runoob
+import kotlinx.android.synthetic.main.activity_kotlin.*
 import java.util.concurrent.locks.Lock
 
 class KotlinActivity : AppCompatActivity() {
@@ -13,7 +15,22 @@ class KotlinActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kotlin)
 
+        /**
+         * lambda表达式本质上是传递一个代码块，传统的setOnClickListener参数需要传递一个匿名内部类，实现一个onClick方法，而函数式编程是
+         * 支持将函数作为参数传递的，
+         */
+        test_tv.setOnClickListener{
+            it.visibility=View.VISIBLE
+        }
 
+        /**
+         * 这个是对象表达式的形式定义匿名内部类
+         */
+        test_tv.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+
+            }
+        })
     }
 
     fun personTest() {

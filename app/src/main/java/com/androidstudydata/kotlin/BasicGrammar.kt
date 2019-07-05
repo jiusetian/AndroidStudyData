@@ -66,7 +66,7 @@ class BasicGrammar {
         //字段后加!!表示抛出空指针异常
         val ages = age!!.toInt();
         //不做处理返回null
-        val age1 = age?.toInt();
+        val age1 = age?.toInt()
         //age为null就返回-1
         val age2 = age?.toInt() ?: -1;
 

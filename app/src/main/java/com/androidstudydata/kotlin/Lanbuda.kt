@@ -29,7 +29,7 @@ class Lanbuda {
 
     // lambda
     val lbd2: (Int, Int) -> Int = { a, b -> a + b }
-    // 或者
+    // 省略了：后面的类型
     val lbd3 = { a: Int, b: Int -> a + b }
 
     /**
@@ -39,7 +39,8 @@ class Lanbuda {
         // 这里举例一个语言自带的一个高阶函数filter,此函数的作用是过滤掉不满足条件的值。
         val arr = arrayOf(1, 3, 5, 7, 9)
         // 过滤掉数组中元素小于2的元素，取其第一个打印。这里的it就表示每一个元素。
-        //首先filter是一个Array的一个函数，这个函数的参数是一个匿名函数，匿名函数的参数是泛型T，返回一个boolean值，这个匿名函数可以用lambda表达式去实现
+        //首先filter是一个Array的一个函数，这个函数的参数是一个匿名函数，匿名函数的参数是泛型T，返回一个boolean值，
+        // 这个匿名函数可以用lambda表达式去实现
         //it是在当一个高阶函数中Lambda表达式的参数只有一个的时候可以使用it来使用此参数。it可表示为单个参数的隐式名称
         println(arr.filter { it < 5 }.component1())
 
@@ -90,6 +91,52 @@ class Lanbuda {
         println(test1(3, 5))
         println(test2(4, 6))
         println(test3(5, 7))
+
+        //lbd测试1
+        lbdtest(object: Lbdinterface {
+            override fun test(s: String, i: Int) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        })
+
+
+    }
+
+    /**
+     * lambda相关测试
+     */
+    fun lambdaTest(){
+
+        /**
+         * 如果是java代码中函数的匿名内部类参数，可以直接用lambda表达式实现，但是kotlin中函数的匿名内部类参数，不能用lambda去实现
+         * 只要是只有一个抽象函数的接口作为参数，就可以用lambda去实现
+         */
+        LambdaJava.test ({},{})
+    }
+
+
+    /**
+     * lambda测试接口
+     */
+    interface Lbdinterface{
+        fun test(s:String,i:Int)
+
+    }
+
+    interface Lbdinterface2{
+        fun test(s:String)
+
+        fun test2(i:Int)
+
+    }
+
+
+    fun lbdtest(lbdinterface: Lbdinterface){
+
+    }
+
+    fun lbdtest2(l2:Lbdinterface2){
+
     }
 
 }
