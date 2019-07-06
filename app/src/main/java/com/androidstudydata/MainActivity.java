@@ -282,7 +282,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RxJavaTest rxJavaTest=new RxJavaTest();
-                rxJavaTest.exceptionTest();
+                //rxJavaTest.exceptionTest();
+                //rxJavaTest.composeTest();
+                //rxJavaTest.distinctUntilChangedTest();
+                rxJavaTest.contactErrorDelayTest();
             }
         });
 
