@@ -8,7 +8,7 @@ import android.support.annotation.RequiresApi
  * Date：2019/6/14
  * Note：
  */
-class Lanbuda {
+object Lambda {
 
     // 源代码
     //fun test(){ println("无参数") }
@@ -136,6 +136,10 @@ class Lanbuda {
     }
 
     fun lbdtest2(l2:Lbdinterface2){
+
+    }
+
+    fun setListener(listener:(Int,String)->Int){
 
     }
 

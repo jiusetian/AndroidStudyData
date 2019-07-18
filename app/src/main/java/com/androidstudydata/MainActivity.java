@@ -15,6 +15,8 @@ import com.androidstudydata.annotation.ViewInjector;
 import com.androidstudydata.annotation.runtimeanno.AnnoUtils;
 import com.androidstudydata.annotation.runtimeanno.Person;
 import com.androidstudydata.debug.Debug;
+import com.androidstudydata.eventbus.EventBusActivity;
+import com.androidstudydata.eventbus.MyEvent;
 import com.androidstudydata.genericity.Genericity;
 import com.androidstudydata.genericity.SubGenericty;
 import com.androidstudydata.handler.HandlerDemo;
@@ -22,7 +24,7 @@ import com.androidstudydata.javamap.MapTest;
 import com.androidstudydata.json.BaseReceiver;
 import com.androidstudydata.json.History;
 import com.androidstudydata.json.JsonUtil;
-import com.androidstudydata.kotlin.ktmap.KtMapTest;
+import com.androidstudydata.kotlin.BasicGrammar;
 import com.androidstudydata.matrix.MatrixTest;
 import com.androidstudydata.memory.MemoryActivity;
 import com.androidstudydata.propertyanima.AnimaActivity;
@@ -30,13 +32,19 @@ import com.androidstudydata.reflect.ReflectDemo;
 import com.androidstudydata.rxjava.RxJavaTest;
 import com.androidstudydata.service.ServiceTest;
 import com.androidstudydata.thread.InterruputSleepThread;
+import com.androidstudydata.throwable.MyException;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.internal.$Gson$Types;
 import com.lib_java.compileAnnotation.BindView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.List;
+
+import kotlin.jvm.functions.Function0;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         //LogUtils.d("路径="+this.getExternalFilesDir(Environment.MEDIA_MOUNTED).getPath());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        EventBus.getDefault().register(this); //注册eventbus
         ViewInjector.injectView(this);
         //ViewServer.get(this).addWindow(this);
 //        Fragment blankFragment=new BlankFragment();
@@ -247,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new MapTest().test();
+
             }
         });
 
@@ -266,7 +276,19 @@ public class MainActivity extends AppCompatActivity {
 //                xiaohong.buyCoach();
 //                xiaohong.buyGucci();
 
-                new KtMapTest().test(33);
+               // new KtMapTest().test(33);
+                //new BasicGrammar().logTest("我是","刘兴荣");
+                //LogUtil.INSTANCE.d("我是是啦啦啦啦啦啦");
+               // BasicGrammar.INSTANCE.mapTest();
+                LogUtils.d("返回值="+BasicGrammar.INSTANCE.returnTest02());
+                //kotlin中的函数参数，可以有如下的方式实现
+                BasicGrammar.INSTANCE.retu02(3, new Function0<Integer>() {
+                    @Override
+                    public Integer invoke() {
+                        return 5;
+                    }
+                });
+
             }
         });
 
@@ -289,6 +311,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //eventbus测试
+        findViewById(R.id.eventbus_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, EventBusActivity.class));
+            }
+        });
+
+        //异常测试
+        findViewById(R.id.exception_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MyException().exceptionTest();
+            }
+        });
+
 
         //android.os.Debug.stopMethodTracing();
     }
@@ -308,5 +346,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         // ViewServer.get(this).removeWindow(this);
+    }
+
+    @Subscribe
+    public void onBusEvent(MyEvent myEvent){
+        LogUtils.d("接收到事件");
     }
 }

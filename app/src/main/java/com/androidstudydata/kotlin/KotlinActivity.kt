@@ -52,7 +52,7 @@ class KotlinActivity : AppCompatActivity() {
         //这里调用的是次构造函数
         var runoob: Runoob = Runoob("菜鸟教程", 1000)
         //调用了扩展函数
-        var p: Person = Person();
+        var p: Person = Person()
         p.Print()
     }
 
