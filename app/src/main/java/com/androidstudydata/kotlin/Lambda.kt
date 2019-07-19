@@ -140,7 +140,6 @@ object Lambda {
     }
 
     fun setListener(listener:(Int,String)->Int){
-
     }
 
 }

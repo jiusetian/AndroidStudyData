@@ -8,6 +8,7 @@ package com.androidstudydata.throwable;
 public class MyException {
 
     public void exceptionTest() {
+
         String s = null;
         if (s == null) {
             try {
