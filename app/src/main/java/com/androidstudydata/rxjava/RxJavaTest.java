@@ -2,6 +2,7 @@ package com.androidstudydata.rxjava;
 
 import android.annotation.SuppressLint;
 
+import com.androidstudydata.LogUtil;
 import com.androidstudydata.LogUtils;
 
 import io.reactivex.Observable;
@@ -13,7 +14,10 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import okio.ByteString;
+
+import static io.reactivex.Observable.just;
 
 /**
  * Author：Alex
@@ -22,6 +26,76 @@ import okio.ByteString;
  */
 public class RxJavaTest {
 
+
+    @SuppressLint("CheckResult")
+    public void defaultEmpty(){
+
+        just(3, 4, 5, 6)
+                .filter(new Predicate<Integer>() {
+                    @Override
+                    public boolean test(Integer integer) throws Exception {
+                        return true;
+                    }
+                })
+                .map(new Function<Integer, Integer>() {
+                    @Override
+                    public Integer apply(Integer integer) throws Exception {
+
+                        return integer;
+                    }
+                })
+                .defaultIfEmpty(88)
+                .flatMap(new Function<Integer, ObservableSource<?>>() {
+                    @Override
+                    public ObservableSource<?> apply(Integer integer) throws Exception {
+                        LogUtil.INSTANCE.d("执行了flatmap="+integer);
+                        return just(53,4,646,4);
+                    }
+                })
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        LogUtil.INSTANCE.d("执行");
+                    }
+                });
+
+    }
+
+
+    /**
+     * 当filter的条件都返回false的时候，后面是不会接收到前面发送的数据的,所以说filter返回false的时候有拦截执行的作用，就是后的相关就不会再执行了
+     */
+    @SuppressLint("CheckResult")
+    public void filterTest() {
+        just(3, 4, 5, 6)
+                .filter(new Predicate<Integer>() {
+                    @Override
+                    public boolean test(Integer integer) throws Exception {
+                        return false;
+                    }
+                })
+                .flatMap(new Function<Integer, ObservableSource<?>>() {
+                    @Override
+                    public ObservableSource<?> apply(Integer integer) throws Exception {
+                        LogUtil.INSTANCE.d("执行了flatmap");
+                        return Observable.just(53,4,646,4);
+                    }
+                })
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        LogUtil.INSTANCE.d("执行");
+                    }
+                });
+//                .map(new Function<Integer, String>() {
+//                    @Override
+//                    public String apply(Integer integer) throws Exception {
+//                        LogUtil.INSTANCE.d("执行了map方法");
+//                        return integer + "";
+//                    }
+//                })
+
+    }
 
     public void contactErrorDelayTest() {
         Observable.concatArrayDelayError(
@@ -38,7 +112,7 @@ public class RxJavaTest {
                         emitter.onComplete();
                     }
                 }),
-                Observable.just(4, 5, 6))
+                just(4, 5, 6))
                 .take(3)
                 .subscribe(new Observer<Integer>() {
                     @Override
@@ -64,7 +138,7 @@ public class RxJavaTest {
 
     @SuppressLint("CheckResult")
     public void distinctUntilChangedTest() {
-        Observable.just("lxr1", "lxr2", "lxr2")
+        just("lxr1", "lxr2", "lxr2")
                 .distinctUntilChanged(new Function<String, String>() {
                     @Override
                     public String apply(String s) throws Exception {
@@ -115,7 +189,7 @@ public class RxJavaTest {
      * 异常测试
      */
     public void exceptionTest() {
-        Observable.just(2, 3, 4, 5)
+        just(2, 3, 4, 5)
                 .map(new Function<Integer, String>() {
                     @Override
                     public String apply(Integer integer) throws Exception {

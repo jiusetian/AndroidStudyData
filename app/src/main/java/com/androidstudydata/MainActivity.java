@@ -29,6 +29,7 @@ import com.androidstudydata.matrix.MatrixTest;
 import com.androidstudydata.memory.MemoryActivity;
 import com.androidstudydata.propertyanima.AnimaActivity;
 import com.androidstudydata.reflect.ReflectDemo;
+import com.androidstudydata.rxjava.RxJavaKtTest;
 import com.androidstudydata.rxjava.RxJavaTest;
 import com.androidstudydata.service.ServiceTest;
 import com.androidstudydata.thread.InterruputSleepThread;
@@ -307,7 +308,10 @@ public class MainActivity extends AppCompatActivity {
                 //rxJavaTest.exceptionTest();
                 //rxJavaTest.composeTest();
                 //rxJavaTest.distinctUntilChangedTest();
-                rxJavaTest.contactErrorDelayTest();
+                //rxJavaTest.contactErrorDelayTest();
+                //rxJavaTest.filterTest();
+                //rxJavaTest.defaultEmpty();
+                RxJavaKtTest.INSTANCE.defaultEmptyTest();
             }
         });
 
