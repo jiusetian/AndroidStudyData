@@ -1,5 +1,6 @@
 package com.androidstudydata.thread;
 
+import com.androidstudydata.KLogUtil;
 import com.androidstudydata.LogUtils;
 
 import java.util.concurrent.LinkedBlockingDeque;
@@ -19,14 +20,21 @@ public class InterruputSleepThread {
         thread01 = new Thread(new Runnable() {
             @Override
             public void run() {
-                LogUtils.d("开始执行线程");
-                try {
-                    queue.take();
-                    LogUtils.d("take取到了元素");
-                } catch (InterruptedException e) {
-                    LogUtils.d("中断异常");
+                //判断线程有没有被中断
+                while (!thread01.isInterrupted()){
+                    LogUtils.d("开始执行线程");
+                    try {
+                        //如果queue没有元素，此时线程会被阻塞，此时想要结束线程就需要调用interrupt方法
+                        queue.take();
+                        LogUtils.d("take取到了元素");
+                    } catch (InterruptedException e) {
+                        LogUtils.d("中断异常="+thread01.isInterrupted());
+                        //再次中断
+                        thread01.interrupt();
+                        KLogUtil.INSTANCE.d("再次的中断状态="+thread01.isInterrupted());
+                    }
                 }
-
+                KLogUtil.INSTANCE.d("退出while循环");
             }
         });
 
@@ -35,7 +43,13 @@ public class InterruputSleepThread {
 
     //中断线程
     public void interruput() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         thread01.interrupt();
+        LogUtils.d("thread01是否被中断="+thread01.isInterrupted());
     }
 
     public static void main() throws InterruptedException {

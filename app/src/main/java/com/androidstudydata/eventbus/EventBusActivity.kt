@@ -3,7 +3,7 @@ package com.androidstudydata.eventbus
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.android.EventLib
-import com.androidstudydata.LogUtil
+import com.androidstudydata.KLogUtil
 import com.androidstudydata.R
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -23,7 +23,7 @@ class EventBusActivity : AppCompatActivity() {
 
     @Subscribe
     fun onEvent(event: EventLib) {
-        LogUtil.i("接收到消息")
+        KLogUtil.i("接收到消息")
     }
 
 

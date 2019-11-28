@@ -76,7 +76,7 @@
             android:id="@+id/handler"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="消息机制" />
+            android:text="handler消息机制" />
 
         <Button
             android:id="@+id/debug"
@@ -121,6 +121,12 @@
             android:text="Kotlin测试" />
 
         <Button
+            android:id="@+id/kotlin_collection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kotlin集合测试" />
+
+        <Button
             android:id="@+id/service_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -143,6 +149,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="异常测试" />
+
+        <Button
+            android:id="@+id/common_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="普通测试" />
 
     </LinearLayout>
 

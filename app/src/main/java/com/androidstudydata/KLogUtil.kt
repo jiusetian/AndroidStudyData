@@ -5,7 +5,7 @@ package com.androidstudydata
  * Date：2019/7/11
  * Note：
  */
-object LogUtil {
+object KLogUtil {
 
     const val LOGTAG = "im_socket"
     const val debugEnabled = true

@@ -1,5 +1,7 @@
 package com.androidstudydata.kotlin.ktmap
 
+import com.androidstudydata.KLogUtil
+
 /**
  * Author：Alex
  * Date：2019/6/27
@@ -8,9 +10,9 @@ package com.androidstudydata.kotlin.ktmap
 class KtMapTest {
 
     fun test(i:Int) {
-
         //定义一个list
         val list = listOf(1, 3, 4, 5, 6, 7, 43, 63)
+
         //直接用map输出
         list.map(::println) //纯粹用于迭代的话会影响性能，实现里面还有一个数组
         //public inline fun <T, R> Iterable<T>.map(transform: (T) -> R): List<R> {
@@ -28,5 +30,12 @@ class KtMapTest {
         newList2.forEach(::println)
 
         println("参数是=$i")
+    }
+
+    fun arrayLength(){
+        val array=IntArray(10)
+        KLogUtil.i("大小01="+array.size)
+        array[0]=2
+        KLogUtil.i("大小01="+array.count())
     }
 }

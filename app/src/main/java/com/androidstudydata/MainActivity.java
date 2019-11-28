@@ -14,17 +14,18 @@ import android.widget.Button;
 import com.androidstudydata.annotation.ViewInjector;
 import com.androidstudydata.annotation.runtimeanno.AnnoUtils;
 import com.androidstudydata.annotation.runtimeanno.Person;
+import com.androidstudydata.commontest.ComTest;
 import com.androidstudydata.debug.Debug;
 import com.androidstudydata.eventbus.EventBusActivity;
 import com.androidstudydata.eventbus.MyEvent;
 import com.androidstudydata.genericity.Genericity;
 import com.androidstudydata.genericity.SubGenericty;
-import com.androidstudydata.handler.HandlerDemo;
+import com.androidstudydata.handler.HandlerActivity;
 import com.androidstudydata.javamap.MapTest;
-import com.androidstudydata.json.BaseReceiver;
-import com.androidstudydata.json.History;
 import com.androidstudydata.json.JsonUtil;
-import com.androidstudydata.kotlin.BasicGrammar;
+import com.androidstudydata.json.MyData;
+import com.androidstudydata.kotlin.CollectionOperator;
+import com.androidstudydata.kotlin.ktmap.KtMapTest;
 import com.androidstudydata.matrix.MatrixTest;
 import com.androidstudydata.memory.MemoryActivity;
 import com.androidstudydata.propertyanima.AnimaActivity;
@@ -32,6 +33,7 @@ import com.androidstudydata.reflect.ReflectDemo;
 import com.androidstudydata.rxjava.RxJavaKtTest;
 import com.androidstudydata.rxjava.RxJavaTest;
 import com.androidstudydata.service.ServiceTest;
+import com.androidstudydata.thread.AtomicIntegerTest;
 import com.androidstudydata.thread.InterruputSleepThread;
 import com.androidstudydata.throwable.MyException;
 import com.androidstudydata.view.ConstraintLayoutActivity;
@@ -43,9 +45,8 @@ import com.lib_java.compileAnnotation.BindView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import kotlin.jvm.functions.Function0;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -70,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
 //        ft.add(R.id.fragment_container,blankFragment);
 //        //提交
 //        ft.commit();
-
         //view时间分发
         findViewById(R.id.dispatch_view).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,12 +116,24 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //CaculateSync.main();
                 //new CaculateSync().test();
-                if (thread[0] == null) {
-                    thread[0] = new InterruputSleepThread();
-                    thread[0].startThead();
-                } else {
-                    thread[0].interruput();
-                }
+//                if (thread[0] == null) {
+//                    thread[0] = new InterruputSleepThread();
+//                    thread[0].startThead();
+//                } else {
+//                    thread[0].interruput();
+//                }
+                //new TwoThreadCreater().executeOneRun();
+               // DeadLock.test();
+                //CycleDeadLock.test();
+//                InterruputSleepThread thread1=new InterruputSleepThread();
+//                thread1.startThead();
+//                thread1.interruput();
+                //LockTest.lockTest();
+                //LockTest.tryLockTest();
+                //new SumArrayFor5Threads().startSum();
+                //AtomicIntegerTest.IntegerIncreaseTest.test();
+                //AtomicIntegerTest.IntegerVolatileTest.test();
+                AtomicIntegerTest.test();
             }
         });
 
@@ -147,11 +159,11 @@ public class MainActivity extends AppCompatActivity {
 //                Erasure<String> erasure = new Erasure<>("刘兴荣");
 //                Class clazz = erasure.getErasure().getClass();
 //                LogUtils.d("泛型的类型=" + clazz.getSimpleName());
-                Genericity genericity=new SubGenericty<List<String>>();
+                Genericity genericity = new SubGenericty<List<String>>();
                 //Genericity genericity=new Genericity();
                 //genericity.shuzufanxing();
-                LogUtils.d("泛型="+genericity.getType()+"////"+genericity.getRawType()+"???"+Utils.findNeedType(genericity.getClass()));
-                LogUtils.d("gson泛型="+ $Gson$Types.newParameterizedTypeWithOwner(null, List.class, String.class));
+                LogUtils.d("泛型=" + genericity.getType() + "////" + genericity.getRawType() + "???" + Utils.findNeedType(genericity.getClass()));
+                LogUtils.d("gson泛型=" + $Gson$Types.newParameterizedTypeWithOwner(null, List.class, String.class));
 
 //                Type rawType=genericity.getRawType(); //返回List
 //                Type type=genericity.getType(); //返回List<String>
@@ -178,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //消息机制
+        //handler消息机制
         findViewById(R.id.handler).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,7 +198,8 @@ public class MainActivity extends AppCompatActivity {
 //                new HandlerDemo().sendMsg();
                 //     new HandlerDemo().post();
 //                new HandlerDemo().createHandler3();
-                new HandlerDemo().handler3Post();
+                //new HandlerDemo().handler3Post();
+                startAct(HandlerActivity.class);
             }
         });
 
@@ -242,8 +255,17 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     //MyData myData = (MyData) JsonUtil.jsonStringToObject("{\"ID\":1,\"Name\":\"hpy\",\"Age\":18}", MyData.class);
-                    BaseReceiver<List<History>> receiver= (BaseReceiver<List<History>>) JsonUtil.jsonStringToObject(JsonUtil.histroy011,BaseReceiver.class);
-                    LogUtils.d("ID是" + receiver.toString());
+//                    BaseReceiver<List<History>> receiver= (BaseReceiver<List<History>>) JsonUtil.jsonStringToObject(JsonUtil.histroy011,BaseReceiver.class);
+//                    LogUtils.d("ID是" + receiver.toString());
+                    List<MyData> datas = new ArrayList();
+                    MyData data = new MyData();
+                    data.setName("小龙人");
+                    MyData data1 = new MyData();
+                    data1.setName("劳心劳肺");
+                    datas.add(data);
+                    datas.add(data1);
+                    KLogUtil.INSTANCE.d("字符串=" + JsonUtil.objectToJsonString(datas));
+
                 } catch (JsonSyntaxException e) {
                     LogUtils.d("有异常");
                     e.printStackTrace();
@@ -258,6 +280,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new MapTest().test();
 
+            }
+        });
+
+        //kotlin集合测试
+        findViewById(R.id.kotlin_collection).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CollectionOperator.INSTANCE.elementOperator();
             }
         });
 
@@ -277,18 +307,21 @@ public class MainActivity extends AppCompatActivity {
 //                xiaohong.buyCoach();
 //                xiaohong.buyGucci();
 
-               // new KtMapTest().test(33);
+                // new KtMapTest().test(33);
                 //new BasicGrammar().logTest("我是","刘兴荣");
                 //LogUtil.INSTANCE.d("我是是啦啦啦啦啦啦");
-               // BasicGrammar.INSTANCE.mapTest();
-                LogUtils.d("返回值="+BasicGrammar.INSTANCE.returnTest02());
-                //kotlin中的函数参数，可以有如下的方式实现
-                BasicGrammar.INSTANCE.retu02(3, new Function0<Integer>() {
-                    @Override
-                    public Integer invoke() {
-                        return 5;
-                    }
-                });
+                // BasicGrammar.INSTANCE.mapTest();
+//                LogUtils.d("返回值="+BasicGrammar.INSTANCE.returnTest02());
+//                //kotlin中的函数参数，可以有如下的方式实现
+//                BasicGrammar.INSTANCE.retu02(3, new Function0<Integer>() {
+//                    @Override
+//                    public Integer invoke() {
+//                        return 5;
+//                    }
+//                });
+                new KtMapTest().arrayLength();
+                //LogUtil.INSTANCE.d("测试=" + Lambda.INSTANCE.denghaotest(11, 33));
+
 
             }
         });
@@ -304,7 +337,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.rxjava_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RxJavaTest rxJavaTest=new RxJavaTest();
+                RxJavaTest rxJavaTest = new RxJavaTest();
                 //rxJavaTest.exceptionTest();
                 //rxJavaTest.composeTest();
                 //rxJavaTest.distinctUntilChangedTest();
@@ -331,6 +364,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //普通测试
+        findViewById(R.id.common_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ComTest.splitTest();
+                ComTest.weiyiTest();
+            }
+        });
+
 
         //android.os.Debug.stopMethodTracing();
     }
@@ -353,7 +395,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void onBusEvent(MyEvent myEvent){
+    public void onBusEvent(MyEvent myEvent) {
         LogUtils.d("接收到事件");
     }
 }

@@ -2,7 +2,7 @@ package com.androidstudydata.rxjava;
 
 import android.annotation.SuppressLint;
 
-import com.androidstudydata.LogUtil;
+import com.androidstudydata.KLogUtil;
 import com.androidstudydata.LogUtils;
 
 import io.reactivex.Observable;
@@ -48,14 +48,14 @@ public class RxJavaTest {
                 .flatMap(new Function<Integer, ObservableSource<?>>() {
                     @Override
                     public ObservableSource<?> apply(Integer integer) throws Exception {
-                        LogUtil.INSTANCE.d("执行了flatmap="+integer);
+                        KLogUtil.INSTANCE.d("执行了flatmap="+integer);
                         return just(53,4,646,4);
                     }
                 })
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
-                        LogUtil.INSTANCE.d("执行");
+                        KLogUtil.INSTANCE.d("执行");
                     }
                 });
 
@@ -77,14 +77,14 @@ public class RxJavaTest {
                 .flatMap(new Function<Integer, ObservableSource<?>>() {
                     @Override
                     public ObservableSource<?> apply(Integer integer) throws Exception {
-                        LogUtil.INSTANCE.d("执行了flatmap");
+                        KLogUtil.INSTANCE.d("执行了flatmap");
                         return Observable.just(53,4,646,4);
                     }
                 })
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
-                        LogUtil.INSTANCE.d("执行");
+                        KLogUtil.INSTANCE.d("执行");
                     }
                 });
 //                .map(new Function<Integer, String>() {

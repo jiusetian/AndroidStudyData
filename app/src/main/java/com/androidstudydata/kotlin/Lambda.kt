@@ -2,6 +2,7 @@ package com.androidstudydata.kotlin
 
 import android.os.Build
 import android.support.annotation.RequiresApi
+import com.easysocket.utils.LogUtil
 
 /**
  * Author：Alex
@@ -31,6 +32,16 @@ object Lambda {
     val lbd2: (Int, Int) -> Int = { a, b -> a + b }
     // 省略了：后面的类型
     val lbd3 = { a: Int, b: Int -> a + b }
+
+    /**
+     * 有关lambda的=号的应用
+     */
+    fun denghaotest(a: Int,i: Int) = denghao(i)+a
+
+    fun denghao(i: Int): Int {
+        LogUtil.d("等于="+(i+22))
+        return i + 22
+    }
 
     /**
      * it相关测试
@@ -93,7 +104,7 @@ object Lambda {
         println(test3(5, 7))
 
         //lbd测试1
-        lbdtest(object: Lbdinterface {
+        lbdtest(object : Lbdinterface {
             override fun test(s: String, i: Int) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
@@ -105,41 +116,41 @@ object Lambda {
     /**
      * lambda相关测试
      */
-    fun lambdaTest(){
+    fun lambdaTest() {
 
         /**
          * 如果是java代码中函数的匿名内部类参数，可以直接用lambda表达式实现，但是kotlin中函数的匿名内部类参数，不能用lambda去实现
          * 只要是只有一个抽象函数的接口作为参数，就可以用lambda去实现
          */
-        LambdaJava.test ({},{})
+        LambdaJava.test({}, {})
     }
 
 
     /**
      * lambda测试接口
      */
-    interface Lbdinterface{
-        fun test(s:String,i:Int)
+    interface Lbdinterface {
+        fun test(s: String, i: Int)
 
     }
 
-    interface Lbdinterface2{
-        fun test(s:String)
+    interface Lbdinterface2 {
+        fun test(s: String)
 
-        fun test2(i:Int)
-
-    }
-
-
-    fun lbdtest(lbdinterface: Lbdinterface){
+        fun test2(i: Int)
 
     }
 
-    fun lbdtest2(l2:Lbdinterface2){
+
+    fun lbdtest(lbdinterface: Lbdinterface) {
 
     }
 
-    fun setListener(listener:(Int,String)->Int){
+    fun lbdtest2(l2: Lbdinterface2) {
+
+    }
+
+    fun setListener(listener: (Int, String) -> Int) {
     }
 
 }

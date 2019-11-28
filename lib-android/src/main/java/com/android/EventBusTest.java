@@ -8,7 +8,7 @@ import org.greenrobot.eventbus.Subscribe;
 /**
  * Author：Alex
  * Date：2019/7/23
- * Note：
+ * Note：eventbus测试类，eventbus不同的库可以相互传递信息，只要他们发送和接收的是同一个类，就可以传递
  */
 public class EventBusTest {
 
