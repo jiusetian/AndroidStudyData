@@ -156,6 +156,13 @@
             android:layout_height="wrap_content"
             android:text="普通测试" />
 
+        <Button
+            android:id="@+id/act_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="activity测试" />
+
+
     </LinearLayout>
 
 

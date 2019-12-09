@@ -18,6 +18,7 @@ public class HandlerDemo {
     //private Handler handler1=new Handler();
 
     Runnable runnable=new Runnable() {
+
         @Override
         public void run() {
 
@@ -30,7 +31,7 @@ public class HandlerDemo {
     {
         @Override
         public void handleMessage(Message msg) {
-            LogUtils.d("handler接收到消息,what内容=" + msg.what);
+            LogUtils.d("handler接收到消息,what内容=" + msg.what+"，当前线程为："+Thread.currentThread().getName());
         }
     };
 
@@ -38,11 +39,12 @@ public class HandlerDemo {
     Handler handler1 = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
+            LogUtils.d("handler1接收到消息,what内容=" + msg.what);
             return false;
         }
     });
 
-    private void sendMsg() {
+    public void sendMsg() {
         //在一个子线程中通过主线程的handler发送消息给主线程处理
         new Thread(new Runnable() {
             @Override
@@ -84,19 +86,28 @@ public class HandlerDemo {
                     }
                 };
 
-                try {
-                    handler3.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            LogUtils.d("handler3的post执行");
-                        }
-                    }, 2000);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                //子线程创建handler还必须调用loop方法，loop方法会有一个for的无限循环，所以这里会被阻塞死
+                Looper.loop();
+                LogUtils.d("loop执行后");
             }
-        }).start();
+        },"线程03").start();
+
+
+        try {
+            Thread.sleep(1000);
+            handler3.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    LogUtils.d("handler3的post执行在："+Thread.currentThread().getName());
+                }
+            }, 1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        handler3.sendEmptyMessage(1);
     }
+
 
     public void post() {
         handler1.post(new Runnable() {

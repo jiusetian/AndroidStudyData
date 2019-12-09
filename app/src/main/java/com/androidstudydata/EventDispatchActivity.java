@@ -41,7 +41,6 @@ public class EventDispatchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_dispatch);
         ViewServer.get(this).addWindow(this);
-        
         findViewById(R.id.parent_view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

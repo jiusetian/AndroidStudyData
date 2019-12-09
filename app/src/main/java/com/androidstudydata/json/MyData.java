@@ -1,11 +1,13 @@
 package com.androidstudydata.json;
 
+import java.io.Serializable;
+
 /**
  * Author：Alex
  * Date：2019/5/31
  * Note：
  */
-public class MyData implements IReceive {
+public class MyData implements IReceive , Serializable {
     private int D;
     private String Name;
     private int Age;

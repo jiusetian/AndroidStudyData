@@ -6,4 +6,5 @@ package com.androidstudydata.eventbus;
  * Note：
  */
 public class MyEvent {
+    public String s="事件";
 }

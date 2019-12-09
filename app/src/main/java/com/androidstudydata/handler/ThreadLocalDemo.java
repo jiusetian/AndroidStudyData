@@ -1,7 +1,5 @@
 package com.androidstudydata.handler;
 
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 
 import com.androidstudydata.LogUtils;
@@ -12,27 +10,20 @@ import com.androidstudydata.LogUtils;
 
 public class ThreadLocalDemo {
 
-    private java.lang.ThreadLocal<String> booleanThreadLocal = new ThreadLocal<>();
+    private java.lang.ThreadLocal<String> threadLocal = new ThreadLocal();
 
     public void test() {
 
-        new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                return false;
-            }
-        });
+        threadLocal.set("主线程");
 
-        booleanThreadLocal.set("主线程");
-
-        LogUtils.d(Thread.currentThread().getName() + "的值=" + booleanThreadLocal.get());
+        LogUtils.d(Thread.currentThread().getName() + "的值=" + threadLocal.get());
 
         new Thread("线程01") {
             @Override
             public void run() {
                 super.run();
-                booleanThreadLocal.set("线程01");
-                Log.d("tag", Thread.currentThread().getName() + "的值=" + booleanThreadLocal.get());
+                threadLocal.set("线程01");
+                Log.d("tag", Thread.currentThread().getName() + "的值=" + threadLocal.get());
             }
         }.start();
 
@@ -40,8 +31,8 @@ public class ThreadLocalDemo {
             @Override
             public void run() {
                 super.run();
-                //booleanThreadLocal.set("线程02");
-                Log.d("tag", Thread.currentThread().getName() + "的值=" + booleanThreadLocal.get());
+                //threadLocal.set("线程02");
+                Log.d("tag", Thread.currentThread().getName() + "的值=" + threadLocal.get());
             }
         }.start();
 

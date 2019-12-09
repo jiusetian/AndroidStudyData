@@ -7,11 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.EventBusTest
-import com.android.EventLib
-import com.androidstudydata.LogUtils
 import com.androidstudydata.R
 import kotlinx.android.synthetic.main.fragment_event_bus.*
 import org.greenrobot.eventbus.EventBus
+import kotlin.concurrent.thread
 
 
 class EventBusFragment : Fragment() {
@@ -30,11 +29,11 @@ class EventBusFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        send_btn.setOnClickListener{
-            eventBusTest= EventBusTest()
-            EventBus.getDefault().post(EventLib())
-            //EventBusTest().pushEvent()
-            LogUtils.d("点击了发送")
+        thread {
+            send_btn.setOnClickListener{
+                eventBusTest= EventBusTest()
+                EventBus.getDefault().post(MyEvent())
+            }
         }
     }
 

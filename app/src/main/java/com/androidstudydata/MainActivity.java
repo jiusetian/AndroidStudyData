@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 
+import com.androidstudydata.act.TestActivity;
 import com.androidstudydata.annotation.ViewInjector;
 import com.androidstudydata.annotation.runtimeanno.AnnoUtils;
 import com.androidstudydata.annotation.runtimeanno.Person;
@@ -20,7 +21,7 @@ import com.androidstudydata.eventbus.EventBusActivity;
 import com.androidstudydata.eventbus.MyEvent;
 import com.androidstudydata.genericity.Genericity;
 import com.androidstudydata.genericity.SubGenericty;
-import com.androidstudydata.handler.HandlerActivity;
+import com.androidstudydata.handler.HandlerDemo;
 import com.androidstudydata.javamap.MapTest;
 import com.androidstudydata.json.JsonUtil;
 import com.androidstudydata.json.MyData;
@@ -197,9 +198,12 @@ public class MainActivity extends AppCompatActivity {
                 //new ThreadLocalDemo().test();
 //                new HandlerDemo().sendMsg();
                 //     new HandlerDemo().post();
-//                new HandlerDemo().createHandler3();
+                //new HandlerDemo().createHandler3();
                 //new HandlerDemo().handler3Post();
-                startAct(HandlerActivity.class);
+                //startAct(HandlerActivity.class);
+                new HandlerDemo().sendMsg();
+               // new ThreadSwitch().switchTest();
+
             }
         });
 
@@ -252,7 +256,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.json_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 try {
                     //MyData myData = (MyData) JsonUtil.jsonStringToObject("{\"ID\":1,\"Name\":\"hpy\",\"Age\":18}", MyData.class);
 //                    BaseReceiver<List<History>> receiver= (BaseReceiver<List<History>>) JsonUtil.jsonStringToObject(JsonUtil.histroy011,BaseReceiver.class);
@@ -370,6 +373,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //ComTest.splitTest();
                 ComTest.weiyiTest();
+            }
+        });
+
+        //测试activity
+        findViewById(R.id.act_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAct(TestActivity.class);
             }
         });
 
