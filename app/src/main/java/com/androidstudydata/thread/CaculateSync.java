@@ -25,6 +25,7 @@ public class CaculateSync {
 
     //修饰方法中的代码块
     private void addArea() {
+
         //锁可以是任意对象
         synchronized (lock) {
             i++;

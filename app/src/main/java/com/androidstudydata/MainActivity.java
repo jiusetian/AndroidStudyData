@@ -16,13 +16,13 @@ import com.androidstudydata.annotation.ViewInjector;
 import com.androidstudydata.annotation.runtimeanno.AnnoUtils;
 import com.androidstudydata.annotation.runtimeanno.Person;
 import com.androidstudydata.commontest.ComTest;
+import com.androidstudydata.datastruture.PriorityQueueExample;
 import com.androidstudydata.debug.Debug;
 import com.androidstudydata.eventbus.EventBusActivity;
 import com.androidstudydata.eventbus.MyEvent;
 import com.androidstudydata.genericity.Genericity;
 import com.androidstudydata.genericity.SubGenericty;
 import com.androidstudydata.handler.HandlerDemo;
-import com.androidstudydata.javamap.MapTest;
 import com.androidstudydata.json.JsonUtil;
 import com.androidstudydata.json.MyData;
 import com.androidstudydata.kotlin.CollectionOperator;
@@ -34,11 +34,12 @@ import com.androidstudydata.reflect.ReflectDemo;
 import com.androidstudydata.rxjava.RxJavaKtTest;
 import com.androidstudydata.rxjava.RxJavaTest;
 import com.androidstudydata.service.ServiceTest;
-import com.androidstudydata.thread.AtomicIntegerTest;
 import com.androidstudydata.thread.InterruputSleepThread;
+import com.androidstudydata.thread.VolitileTest;
 import com.androidstudydata.throwable.MyException;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
+import com.easysocket.utils.LogUtil;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.internal.$Gson$Types;
 import com.lib_java.compileAnnotation.BindView;
@@ -134,7 +135,9 @@ public class MainActivity extends AppCompatActivity {
                 //new SumArrayFor5Threads().startSum();
                 //AtomicIntegerTest.IntegerIncreaseTest.test();
                 //AtomicIntegerTest.IntegerVolatileTest.test();
-                AtomicIntegerTest.test();
+                //AtomicIntegerTest.test();
+
+                VolitileTest.test();
             }
         });
 
@@ -281,7 +284,8 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                new MapTest().test();
+                //new MapTest().test();
+                 PriorityQueueExample.test();
 
             }
         });
@@ -385,7 +389,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //android.os.Debug.stopMethodTracing();
+        //数据结构测试
+        findViewById(R.id.data_strut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //PriorityQueueExample.test();
+
+                //LogUtil.d("-2移动后的值="+(-2>>>1));
+                int i=10;
+                i-=4;
+                LogUtil.d("等于="+i);
+            }
+        });
     }
 
     private void startAct(Class startClass) {

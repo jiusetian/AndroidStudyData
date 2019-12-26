@@ -25,7 +25,7 @@ public class AtomicIntegerTest {
         for (int i = 0; i < THREADS_CONUT; i++) {
             threads[i] = new Thread(new Runnable() {
                 @Override
-                public void run() {
+                public synchronized void run() {
                     for (int i = 0; i < 1000; i++) {
                         increase();
                     }
