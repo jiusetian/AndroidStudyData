@@ -22,7 +22,7 @@ public class AnnoElement {
     public @interface AnnoElements{
 
         //定义性别枚举
-        enum Gender{MALE,FEMALE};
+        enum Gender{MALE,FEMALE}
 
         //声明枚举
         Gender gender() default Gender.FEMALE;
@@ -45,7 +45,8 @@ public class AnnoElement {
 
 
     /**
-     *
+     * 注解的应用，其中@AnnoElements代表一个注解类型，括号里面代表这个注解的属性和赋值，其实注解可以理解为Java中某个类或字段的
+     * 标识，然后这个标识可能附带一些必要的信息，在Java编译或运行阶段拿来使用
      */
     @AnnoElements(gender = AnnoElements.Gender.MALE,name = "java",
             age = 100,Person = Person.class,ref = @AnnoRef(10),strs = {"a","b"})

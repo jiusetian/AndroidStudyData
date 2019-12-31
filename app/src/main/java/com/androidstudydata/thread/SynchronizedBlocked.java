@@ -25,6 +25,7 @@ public class SynchronizedBlocked implements Runnable{
             }
         }.start();
     }
+
     public void run() {
         //中断判断
         while (true) {

@@ -9,27 +9,33 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.Elements;
 
 public class CodeCreater {
+
     private String packageName;
+    //自动生成类的全路径名：使用注解的类的包路径 + 使用注解的类的名称$$ViewInject
     private String createrClassName;
+    //使用注解的类
     private TypeElement typeElement;
 
-    //保存findViewById要用到的id值和对应的变量元素
+    //保存findViewById要用到View元素和对应的id
     public Map<Integer, VariableElement> injectVariables = new HashMap<>();
 
     public static final String SUFFIX = "ViewInject";
 
     public CodeCreater(Elements elementUtils, TypeElement classElement) {
         this.typeElement = classElement;
-        //获取注解元素类的全包名
+        //获取注解所在类的全包名
         PackageElement packageElement = elementUtils.getPackageOf(classElement);
         String packageName = packageElement.getQualifiedName().toString();
-        //classname
+        //classname 类名称
         String className = classElement.getQualifiedName().toString().substring(packageName.length() + 1);
         this.packageName = packageName;
         this.createrClassName = className + "$$" +SUFFIX;
     }
 
-
+    /**
+     * 生成对应的Java代码
+     * @return
+     */
     public String generateJavaCode() {
         StringBuilder builder = new StringBuilder();
         builder.append("/* Generated code. Do not modify!*/\n");
@@ -50,7 +56,10 @@ public class CodeCreater {
 
     }
 
-
+    /**
+     * 生成对应方法
+     * @param builder
+     */
     private void generateMethods(StringBuilder builder) {
 
         //参加inject方法，实际上是实现ViewInject接口的方法
@@ -72,7 +81,6 @@ public class CodeCreater {
 
         }
         builder.append("  }\n");
-
 
     }
 
