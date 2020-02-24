@@ -22,9 +22,15 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        //局域网搭建的maven创建地址
         maven {
             // 配置仓库地址（获取方式见上文）
             url "http://localhost:8081/repository/lxrmaven/"
+        }
+        //本地maven创建地址
+        maven {
+            // 配置仓库地址，注意：在编译此项目的时候，你要换成你自己的地址或按照这个地址在你的电脑上创建对应的文件夹
+            url "file:\\G:\\MyLocalMaven\\repository"
         }
     }
 }

@@ -11,10 +11,12 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
+import io.reactivex.schedulers.Schedulers;
 import okio.ByteString;
 
 import static io.reactivex.Observable.just;
@@ -26,9 +28,8 @@ import static io.reactivex.Observable.just;
  */
 public class RxJavaTest {
 
-
     @SuppressLint("CheckResult")
-    public void defaultEmpty(){
+    public void defaultEmpty() {
 
         just(3, 4, 5, 6)
                 .filter(new Predicate<Integer>() {
@@ -40,7 +41,6 @@ public class RxJavaTest {
                 .map(new Function<Integer, Integer>() {
                     @Override
                     public Integer apply(Integer integer) throws Exception {
-
                         return integer;
                     }
                 })
@@ -48,8 +48,8 @@ public class RxJavaTest {
                 .flatMap(new Function<Integer, ObservableSource<?>>() {
                     @Override
                     public ObservableSource<?> apply(Integer integer) throws Exception {
-                        KLogUtil.INSTANCE.d("执行了flatmap="+integer);
-                        return just(53,4,646,4);
+                        KLogUtil.INSTANCE.d("执行了flatmap=" + integer);
+                        return just(53, 4, 646, 4);
                     }
                 })
                 .subscribe(new Consumer<Object>() {
@@ -78,9 +78,11 @@ public class RxJavaTest {
                     @Override
                     public ObservableSource<?> apply(Integer integer) throws Exception {
                         KLogUtil.INSTANCE.d("执行了flatmap");
-                        return Observable.just(53,4,646,4);
+                        return Observable.just(53, 4, 646, 4);
                     }
                 })
+                .subscribeOn(Schedulers.io()) //将发射者切换到io线程
+                .observeOn(AndroidSchedulers.mainThread()) //将接收者切换到主线程
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {

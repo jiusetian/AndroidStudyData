@@ -22,6 +22,7 @@ public class BlankFragment extends Fragment {
 
     public BlankFragment() {
         // Required empty public constructor
+
         }
 
 
@@ -41,5 +42,6 @@ public class BlankFragment extends Fragment {
         Bitmap bitmap=graphicLocator.drawLocator(getContext(),"飞机444444444");
         ImageView imageView=view.findViewById(R.id.iv);
         imageView.setImageBitmap(bitmap);
+
     }
 }

@@ -40,5 +40,6 @@ public class ViewLocaActivity extends AppCompatActivity {
 
         BlankFragment blankFragment=new BlankFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,blankFragment).commit();
+
     }
 }

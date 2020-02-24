@@ -29,9 +29,9 @@ import com.androidstudydata.kotlin.CollectionOperator;
 import com.androidstudydata.kotlin.ktmap.KtMapTest;
 import com.androidstudydata.matrix.MatrixTest;
 import com.androidstudydata.memory.MemoryActivity;
+import com.androidstudydata.okhttp.BackPressureTest;
 import com.androidstudydata.propertyanima.AnimaActivity;
 import com.androidstudydata.reflect.ReflectDemo;
-import com.androidstudydata.rxjava.RxJavaKtTest;
 import com.androidstudydata.rxjava.RxJavaTest;
 import com.androidstudydata.service.ServiceTest;
 import com.androidstudydata.thread.InterruputSleepThread;
@@ -39,7 +39,6 @@ import com.androidstudydata.thread.VolitileTest;
 import com.androidstudydata.throwable.MyException;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
-import com.easysocket.utils.LogUtil;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.internal.$Gson$Types;
 import com.lib_java.compileAnnotation.BindView;
@@ -351,7 +350,9 @@ public class MainActivity extends AppCompatActivity {
                 //rxJavaTest.contactErrorDelayTest();
                 //rxJavaTest.filterTest();
                 //rxJavaTest.defaultEmpty();
-                RxJavaKtTest.INSTANCE.defaultEmptyTest();
+                //RxJavaKtTest.INSTANCE.defaultEmptyTest();
+                BackPressureTest backPressureTest =new BackPressureTest();
+                backPressureTest.backBuffer();
             }
         });
 
@@ -398,7 +399,7 @@ public class MainActivity extends AppCompatActivity {
                 //LogUtil.d("-2移动后的值="+(-2>>>1));
                 int i=10;
                 i-=4;
-                LogUtil.d("等于="+i);
+                LogUtils.d("等于="+i);
             }
         });
     }

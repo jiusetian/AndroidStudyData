@@ -1,8 +1,12 @@
 package com.androidstudydata.propertyanima;
 
+import android.animation.FloatEvaluator;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
@@ -13,6 +17,15 @@ import com.androidstudydata.Utils;
  * Created by XR_liu on 2018/11/14.
  */
 public class AnimaTest {
+
+    public void objectAnimaTest(View targetView){
+        ObjectAnimator animator = ObjectAnimator.ofFloat(targetView, "translationX", 100);
+
+        animator.setInterpolator(new LinearInterpolator());
+        animator.setEvaluator(new FloatEvaluator());
+        animator.setDuration(100);
+        animator.start();
+    }
 
     public void valueAnimaTest() {
 

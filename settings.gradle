@@ -1,4 +1,4 @@
-include ':app', ':lib-java', ':lib-android'
+include ':app', ':java', ':lib-android'
 
 //在 settings.gradle 中，则输出"In settings,gradle id is"
 println "In setting中, gradle id is " + gradle.hashCode()
