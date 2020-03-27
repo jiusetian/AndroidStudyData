@@ -2,6 +2,7 @@ package com.androidstudydata.genericity;
 
 import com.androidstudydata.LogUtils;
 import com.androidstudydata.Utils;
+import com.easysocket.utils.LogUtil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
@@ -118,6 +119,40 @@ public class Genericity<T> extends IType<Erasure>{
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * getClass获取的是运行时类的class对象
+     */
+    public void classTypeTest(){
+        List<Father> list=new ArrayList<>();
+        Son son1=new Son();
+        Son son2=new Son();
+        list.add(son1);
+        list.add(son2);
+        for (Father father:list){
+            LogUtil.d("类型00"+father.getClass().getName());
+        }
+        LogUtil.d("类型="+list.get(0).getClass().getName());
+        LogUtil.d("类型2"+Son.class.getName());
+    }
+
+    /**
+     * 1.getGenericSuperclass()获取直接父类的Type，如果有泛型则包含泛型
+     */
+    public void typeTest(){
+        Sub sub=new Sub();
+        LogUtil.d("类型="+sub.getClass().getGenericSuperclass());
+    }
+
+    class Father<T>{
+    }
+
+    class Son<T> extends Father<T>{
+    }
+
+    class Sub extends Son<String>{
+
     }
 
 }

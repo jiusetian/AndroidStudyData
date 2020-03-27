@@ -7,15 +7,23 @@ package com.androidstudydata.throwable;
  */
 public class MyException {
 
-    public void exceptionTest() {
+    //受检查异常
+    public void checkExceptionTest() {
 
         String s = null;
         if (s == null) {
             try {
-                throw new Exception("异常");
+                throw new Exception("非运行时异常");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
+    //运行时异常，抛出时程序会崩溃，可以不用捕获
+    public void runtimeExceptionTest(){
+        throw new RuntimeException("运行时异常");
+    }
+
+
 }

@@ -6,5 +6,4 @@ package com.android;
  * Note：
  */
 public class EventLib {
-
 }

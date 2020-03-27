@@ -7,8 +7,10 @@ import android.util.LruCache;
 import com.easysocket.utils.LogUtil;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Author：Alex
@@ -24,6 +26,8 @@ public class MapTest {
 
     LruCache<String,String> lruCache=new LruCache<>(5);
 
+    Set<String> hashSet=new HashSet<>();
+
     /**
      * hashmap的哈希值计算方法
      * @param hashcode
@@ -35,6 +39,8 @@ public class MapTest {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void test() {
+
+        //hashset测试
 
 //
         Info info=new Info("lxr",80);

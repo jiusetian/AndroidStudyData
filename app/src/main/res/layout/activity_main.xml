@@ -168,6 +168,12 @@
             android:layout_height="wrap_content"
             android:text="数据结构测试" />
 
+        <Button
+            android:id="@+id/frg_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fragment测试" />
+
     </LinearLayout>
 
 

@@ -7,18 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.EventBusTest
+import com.androidstudydata.LogUtils
 import com.androidstudydata.R
-import kotlinx.android.synthetic.main.fragment_event_bus.*
 import org.greenrobot.eventbus.EventBus
 import kotlin.concurrent.thread
 
 
 class EventBusFragment : Fragment() {
 
-    companion object{
-        const val EVENT="事件"
+    companion object {
+        const val EVENT = "事件"
     }
-    lateinit var eventBusTest:EventBusTest
+
+    lateinit var eventBusTest: EventBusTest
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -29,11 +30,10 @@ class EventBusFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        thread {
-            send_btn.setOnClickListener{
-                eventBusTest= EventBusTest()
-                EventBus.getDefault().post(MyEvent())
-            }
+        thread(start = true) {
+            LogUtils.d("发射线程：" + Thread.currentThread().name)
+            eventBusTest = EventBusTest()
+            EventBus.getDefault().post(MyEvent())
         }
     }
 

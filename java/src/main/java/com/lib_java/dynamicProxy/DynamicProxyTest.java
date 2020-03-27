@@ -15,9 +15,9 @@ public class DynamicProxyTest {
         Buyer buyer = new Buyer();
         InvocationHandler invocationHandler = new BuyerInvocationHandler<Buy>(buyer);
         JavaUtil.generateClassFile(Buy.class,"$Proxy0");
-        //获取动态代理对象
+        //获取动态代理对象，其实是对上面的buyer对象包装的代理对象
         Buy buyerProxy = (Buy) Proxy.newProxyInstance(Buy.class.getClassLoader(), new Class<?>[]{Buy.class}, invocationHandler);
-        buyerProxy.buyHouse(); //调用方法
+        buyerProxy.buyHouse(); //调用代理类方法
 
     }
 

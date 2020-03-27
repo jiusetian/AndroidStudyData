@@ -22,6 +22,7 @@ import com.androidstudydata.eventbus.EventBusActivity;
 import com.androidstudydata.eventbus.MyEvent;
 import com.androidstudydata.genericity.Genericity;
 import com.androidstudydata.genericity.SubGenericty;
+import com.androidstudydata.genericity.TypeTest;
 import com.androidstudydata.handler.HandlerDemo;
 import com.androidstudydata.json.JsonUtil;
 import com.androidstudydata.json.MyData;
@@ -40,7 +41,6 @@ import com.androidstudydata.throwable.MyException;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.internal.$Gson$Types;
 import com.lib_java.compileAnnotation.BindView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -163,10 +163,14 @@ public class MainActivity extends AppCompatActivity {
 //                Class clazz = erasure.getErasure().getClass();
 //                LogUtils.d("泛型的类型=" + clazz.getSimpleName());
                 Genericity genericity = new SubGenericty<List<String>>();
+                //genericity.typeTest();
+                TypeTest typeTest=new TypeTest();
+                typeTest.typeParameterTest3();
+               // genericity.classTypeTest();
                 //Genericity genericity=new Genericity();
                 //genericity.shuzufanxing();
-                LogUtils.d("泛型=" + genericity.getType() + "////" + genericity.getRawType() + "???" + Utils.findNeedType(genericity.getClass()));
-                LogUtils.d("gson泛型=" + $Gson$Types.newParameterizedTypeWithOwner(null, List.class, String.class));
+                //LogUtils.d("泛型=" + genericity.getType() + "////" + genericity.getRawType() + "???" + Utils.findNeedType(genericity.getClass()));
+               // LogUtils.d("gson泛型=" + $Gson$Types.newParameterizedTypeWithOwner(null, List.class, String.class));
 
 //                Type rawType=genericity.getRawType(); //返回List
 //                Type type=genericity.getType(); //返回List<String>
@@ -344,7 +348,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RxJavaTest rxJavaTest = new RxJavaTest();
-                //rxJavaTest.exceptionTest();
+                //rxJavaTest.checkExceptionTest();
                 //rxJavaTest.composeTest();
                 //rxJavaTest.distinctUntilChangedTest();
                 //rxJavaTest.contactErrorDelayTest();
@@ -368,7 +372,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.exception_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new MyException().exceptionTest();
+                MyException myException=new MyException();
+                myException.checkExceptionTest();
+                myException.runtimeExceptionTest();
             }
         });
 
@@ -400,6 +406,14 @@ public class MainActivity extends AppCompatActivity {
                 int i=10;
                 i-=4;
                 LogUtils.d("等于="+i);
+            }
+        });
+
+        //fragment测试
+        findViewById(R.id.frg_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAct(FragmentActivity.class);
             }
         });
     }
