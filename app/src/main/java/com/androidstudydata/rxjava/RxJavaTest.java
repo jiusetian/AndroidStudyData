@@ -2,7 +2,7 @@ package com.androidstudydata.rxjava;
 
 import android.annotation.SuppressLint;
 
-import com.androidstudydata.KLogUtil;
+import com.androidstudydata.LogUtil;
 import com.androidstudydata.LogUtils;
 
 import org.reactivestreams.Subscriber;
@@ -55,17 +55,28 @@ public class RxJavaTest {
                 .flatMap(new Function<Integer, ObservableSource<?>>() {
                     @Override
                     public ObservableSource<?> apply(Integer integer) throws Exception {
-                        KLogUtil.INSTANCE.d("执行了flatmap=" + integer);
+                        LogUtil.INSTANCE.d("执行了flatmap=" + integer);
                         return just(53, 4, 646, 4);
                     }
                 })
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
-                        KLogUtil.INSTANCE.d("执行");
+                        LogUtil.INSTANCE.d("执行");
                     }
                 });
 
+    }
+
+    public void mapTest(){
+        just(3, 4, 5, 6)
+                .map(new Function<Integer, Integer>() {
+                    @Override
+                    public Integer apply(Integer integer) throws Exception {
+
+                        return integer;
+                    }
+                });
     }
 
 
@@ -84,7 +95,7 @@ public class RxJavaTest {
                 .flatMap(new Function<Integer, ObservableSource<?>>() {
                     @Override
                     public ObservableSource<?> apply(Integer integer) throws Exception {
-                        KLogUtil.INSTANCE.d("执行了flatmap");
+                        LogUtil.INSTANCE.d("执行了flatmap");
                         return Observable.just(53, 4, 646, 4);
                     }
                 })
@@ -93,7 +104,7 @@ public class RxJavaTest {
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
-                        KLogUtil.INSTANCE.d("执行");
+                        LogUtil.INSTANCE.d("执行");
                     }
                 });
 //                .map(new Function<Integer, String>() {

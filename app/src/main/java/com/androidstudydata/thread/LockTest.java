@@ -1,6 +1,6 @@
 package com.androidstudydata.thread;
 
-import com.androidstudydata.KLogUtil;
+import com.androidstudydata.LogUtil;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
@@ -24,7 +24,7 @@ public class LockTest {
         try {
             System.out.println("线程" + thread.getName() + "获取当前锁"); //打印当前锁的名称
             //如果锁已被其他线程占有则返回false，否则返回true
-            KLogUtil.INSTANCE.d("再次尝试获得锁="+lock.tryLock());
+            LogUtil.INSTANCE.d("再次尝试获得锁="+lock.tryLock());
             Thread.sleep(2000);//为看出执行效果，是线程此处休眠2秒
         } catch (Exception e) {
             System.out.println("线程" + thread.getName() + "发生了异常释放锁");

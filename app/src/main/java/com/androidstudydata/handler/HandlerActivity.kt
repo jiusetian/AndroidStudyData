@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.support.v7.app.AppCompatActivity
-import com.androidstudydata.KLogUtil
+import com.androidstudydata.LogUtil
 import com.androidstudydata.R
 import java.lang.ref.WeakReference
 
@@ -19,7 +19,7 @@ class HandlerActivity : AppCompatActivity() {
     private val handler = Handler {
         when (it.what) {
             10 -> {
-                KLogUtil.i("处理消息")
+                LogUtil.i("处理消息")
             }
         }
         false
@@ -39,7 +39,8 @@ class HandlerActivity : AppCompatActivity() {
 
 
     /**
-     * 自定义handler
+     * 自定义handler，这里用到了弱引用，就是说如果当前activity的强引用已经不存在的时候，这个弱引用的对象会被回收
+     * 如果handler不用静态内部类的话，在创建对象的时候就会变成当前activity的匿名内部类，所以它会持有外部类activity的对象，从而造成内存泄漏
      */
     private class MyHandler(val actWeakReference: WeakReference<HandlerActivity>) : Handler() {
 
@@ -49,7 +50,7 @@ class HandlerActivity : AppCompatActivity() {
             val act = actWeakReference.get()
             act?.let {
                 when (msg?.what) {
-                    11 -> KLogUtil.i("打印11")
+                    11 -> LogUtil.i("打印11")
                 }
             }
         }

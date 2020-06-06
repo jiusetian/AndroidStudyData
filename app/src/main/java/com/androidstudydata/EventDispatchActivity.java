@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.easysocket.EasySocket;
+import com.easysocket.config.EasySocketOptions;
+import com.easysocket.entity.SocketAddress;
+
 /**
  * 事件分发机制相关测试
  * 结论：
@@ -70,11 +74,34 @@ public class EventDispatchActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         ViewServer.get(this).setFocusedWindow(this);
+        initEasySocket();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ViewServer.get(this).removeWindow(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EasySocket.getInstance().destroyConnection();
+    }
+
+    /**
+     * 初始化EasySocket
+     */
+    private void initEasySocket() {
+
+        //socket配置
+        EasySocketOptions options = new EasySocketOptions.Builder()
+                .setSocketAddress(new SocketAddress("192.168.3.9", 9999)) //主机地址
+                .build();
+
+        //初始化EasySocket
+        EasySocket.getInstance()
+                .options(options) //项目配置
+                .buildConnection();//创建一个socket连接
     }
 }

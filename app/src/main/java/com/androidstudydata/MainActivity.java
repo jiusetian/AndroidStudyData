@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 //        ft.add(R.id.fragment_container,blankFragment);
 //        //提交
 //        ft.commit();
+
         //view时间分发
         findViewById(R.id.dispatch_view).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -273,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
                     data1.setName("劳心劳肺");
                     datas.add(data);
                     datas.add(data1);
-                    KLogUtil.INSTANCE.d("字符串=" + JsonUtil.objectToJsonString(datas));
+                    LogUtil.INSTANCE.d("字符串=" + JsonUtil.objectToJsonString(datas));
 
                 } catch (JsonSyntaxException e) {
                     LogUtils.d("有异常");
