@@ -9,10 +9,8 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
-import android.widget.Button;
 
 import com.androidstudydata.act.TestActivity;
-import com.androidstudydata.annotation.ViewInjector;
 import com.androidstudydata.annotation.runtimeanno.AnnoUtils;
 import com.androidstudydata.annotation.runtimeanno.Person;
 import com.androidstudydata.commontest.ComTest;
@@ -26,8 +24,7 @@ import com.androidstudydata.genericity.TypeTest;
 import com.androidstudydata.handler.HandlerDemo;
 import com.androidstudydata.json.JsonUtil;
 import com.androidstudydata.json.MyData;
-import com.androidstudydata.kotlin.CollectionOperator;
-import com.androidstudydata.kotlin.ktmap.KtMapTest;
+import com.androidstudydata.kotlin.KotlinActivity;
 import com.androidstudydata.matrix.MatrixTest;
 import com.androidstudydata.memory.MemoryActivity;
 import com.androidstudydata.okhttp.BackPressureTest;
@@ -41,7 +38,6 @@ import com.androidstudydata.throwable.MyException;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
 import com.google.gson.JsonSyntaxException;
-import com.lib_java.compileAnnotation.BindView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -51,8 +47,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.bindView)
-    Button BindBtn;
+//    @BindView(R.id.bindView)
+//    Button BindBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         EventBus.getDefault().register(this); //注册eventbus
-        ViewInjector.injectView(this);
+        //ViewInjector.injectView(this);
         //ViewServer.get(this).addWindow(this);
 //        Fragment blankFragment=new BlankFragment();
 //        //获取FragmentManager
@@ -125,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 //                    thread[0].interruput();
 //                }
                 //new TwoThreadCreater().executeOneRun();
-               // DeadLock.test();
+                // DeadLock.test();
                 //CycleDeadLock.test();
 //                InterruputSleepThread thread1=new InterruputSleepThread();
 //                thread1.startThead();
@@ -154,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        BindBtn.setText("成功绑定了view");
+        //BindBtn.setText("成功绑定了view");
 
         //泛型
         findViewById(R.id.genericity).setOnClickListener(new View.OnClickListener() {
@@ -165,13 +161,13 @@ public class MainActivity extends AppCompatActivity {
 //                LogUtils.d("泛型的类型=" + clazz.getSimpleName());
                 Genericity genericity = new SubGenericty<List<String>>();
                 //genericity.typeTest();
-                TypeTest typeTest=new TypeTest();
+                TypeTest typeTest = new TypeTest();
                 typeTest.typeParameterTest3();
-               // genericity.classTypeTest();
+                // genericity.classTypeTest();
                 //Genericity genericity=new Genericity();
                 //genericity.shuzufanxing();
                 //LogUtils.d("泛型=" + genericity.getType() + "////" + genericity.getRawType() + "???" + Utils.findNeedType(genericity.getClass()));
-               // LogUtils.d("gson泛型=" + $Gson$Types.newParameterizedTypeWithOwner(null, List.class, String.class));
+                // LogUtils.d("gson泛型=" + $Gson$Types.newParameterizedTypeWithOwner(null, List.class, String.class));
 
 //                Type rawType=genericity.getRawType(); //返回List
 //                Type type=genericity.getType(); //返回List<String>
@@ -209,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 //new HandlerDemo().handler3Post();
                 //startAct(HandlerActivity.class);
                 new HandlerDemo().sendMsg();
-               // new ThreadSwitch().switchTest();
+                // new ThreadSwitch().switchTest();
 
             }
         });
@@ -289,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //new MapTest().test();
-                 PriorityQueueExample.test();
+                PriorityQueueExample.test();
 
             }
         });
@@ -298,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.kotlin_collection).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CollectionOperator.INSTANCE.elementOperator();
+                //CollectionOperator.INSTANCE.elementOperator();
             }
         });
 
@@ -306,6 +302,20 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.kotlin_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 协程
+                //CoroutineTest.INSTANCE.createCoroutine();
+                // CoroutineTest.INSTANCE.suspendTest();
+                //CoroutineTest.INSTANCE.excuteTest();
+                //CoroutineTest.INSTANCE.cancelTest();
+                //CoroutineTest.INSTANCE.synTest();
+                //CoroutineTest.INSTANCE.mutexTest();
+               // CoroutineTest.INSTANCE.launchThreadTest();
+                //CoroutineTest.INSTANCE.cancleTest2();
+                //CoroutineTest.INSTANCE.asyncTest();
+                //CoroutineTest.INSTANCE.hangup();
+                //CoroutineTest.INSTANCE.coroutineHangup();
+                startAct(KotlinActivity.class);
+
 //                ReturnAndSkip returnAndSkip=new ReturnAndSkip();
 //                returnAndSkip.label();
 
@@ -330,13 +340,13 @@ public class MainActivity extends AppCompatActivity {
 //                        return 5;
 //                    }
 //                });
-                new KtMapTest().arrayLength();
+                //new KtMapTest().arrayLength();
                 //LogUtil.INSTANCE.d("测试=" + Lambda.INSTANCE.denghaotest(11, 33));
-
 
             }
         });
 
+        // 服务的测试
         findViewById(R.id.service_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -356,7 +366,7 @@ public class MainActivity extends AppCompatActivity {
                 //rxJavaTest.filterTest();
                 //rxJavaTest.defaultEmpty();
                 //RxJavaKtTest.INSTANCE.defaultEmptyTest();
-                BackPressureTest backPressureTest =new BackPressureTest();
+                BackPressureTest backPressureTest = new BackPressureTest();
                 backPressureTest.backBuffer();
             }
         });
@@ -373,7 +383,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.exception_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyException myException=new MyException();
+                MyException myException = new MyException();
                 myException.checkExceptionTest();
                 myException.runtimeExceptionTest();
             }
@@ -404,9 +414,9 @@ public class MainActivity extends AppCompatActivity {
                 //PriorityQueueExample.test();
 
                 //LogUtil.d("-2移动后的值="+(-2>>>1));
-                int i=10;
-                i-=4;
-                LogUtils.d("等于="+i);
+                int i = 10;
+                i -= 4;
+                LogUtils.d("等于=" + i);
             }
         });
 

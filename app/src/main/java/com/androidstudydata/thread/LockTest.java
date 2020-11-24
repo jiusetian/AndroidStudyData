@@ -45,6 +45,7 @@ public class LockTest {
                 lockTest.lockTest(Thread.currentThread());
             }
         }, "thread1");
+
         //声明一个线程 “线程二”
         Thread thread2 = new Thread(new Runnable() {
 
@@ -131,6 +132,7 @@ public class LockTest {
                 }
             }
         }, "thread1");
+
         //声明一个线程 “线程二”
         Thread thread2 = new Thread(new Runnable() {
             @Override
