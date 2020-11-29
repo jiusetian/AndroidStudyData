@@ -1,6 +1,5 @@
 package com.androidstudydata.commontest;
 
-import com.androidstudydata.LogUtil;
 import com.androidstudydata.LogUtils;
 
 import java.util.Arrays;
@@ -31,7 +30,7 @@ public class ComTest {
      */
     public static void weiyiTest() {
         int i = 1 << 3;
-        LogUtil.INSTANCE.d("位移=" + i);
+        LogUtils.d("位移=" + i);
 
     }
 }

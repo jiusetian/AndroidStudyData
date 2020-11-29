@@ -33,9 +33,9 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.memory_btn).setOnClickListener(this);
         EventBus.getDefault().register(this);
 
-//        if (memoryLeak == null) {
-//            memoryLeak = new MemoryLeak();
-//        }
+        if (memoryLeak == null) {
+            memoryLeak = new MemoryLeak();
+        }
     }
 
     @Override
@@ -65,6 +65,11 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
 
     class MemoryLeak {
         void doSomeThing() {
+            try {
+                Thread.sleep(1000*5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("Wheee!!!");
         }
     }
@@ -76,6 +81,6 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onStop() {
         super.onStop();
-        //EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister(this);
     }
 }

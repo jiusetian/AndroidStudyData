@@ -1,6 +1,5 @@
 package com.androidstudydata.thread;
 
-import com.androidstudydata.LogUtil;
 import com.androidstudydata.LogUtils;
 
 import java.util.concurrent.LinkedBlockingDeque;
@@ -31,10 +30,10 @@ public class InterruputSleepThread {
                         LogUtils.d("中断异常="+thread01.isInterrupted());
                         //再次中断
                         thread01.interrupt();
-                        LogUtil.INSTANCE.d("再次的中断状态="+thread01.isInterrupted());
+                        LogUtils.d("再次的中断状态="+thread01.isInterrupted());
                     }
                 }
-                LogUtil.INSTANCE.d("退出while循环");
+                LogUtils.d("退出while循环");
             }
         });
 

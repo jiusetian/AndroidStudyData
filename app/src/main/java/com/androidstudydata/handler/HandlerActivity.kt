@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.support.v7.app.AppCompatActivity
-import com.androidstudydata.LogUtil
+import com.androidstudydata.LogUtils
 import com.androidstudydata.R
 import java.lang.ref.WeakReference
 
@@ -19,7 +19,7 @@ class HandlerActivity : AppCompatActivity() {
     private val handler = Handler {
         when (it.what) {
             10 -> {
-                LogUtil.i("处理消息")
+                LogUtils.i("处理消息")
             }
         }
         false
@@ -50,7 +50,7 @@ class HandlerActivity : AppCompatActivity() {
             val act = actWeakReference.get()
             act?.let {
                 when (msg?.what) {
-                    11 -> LogUtil.i("打印11")
+                    11 -> LogUtils.i("打印11")
                 }
             }
         }

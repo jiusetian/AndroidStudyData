@@ -1,6 +1,5 @@
 package com.androidstudydata.thread;
 
-import com.androidstudydata.LogUtil;
 import com.androidstudydata.LogUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -22,7 +21,7 @@ public class SumArrayFor5Threads {
             while (i < ints.length) {
                 synchronized (this) {
                     if (i < ints.length) {
-                        LogUtil.INSTANCE.d("当前线程名字=" + Thread.currentThread().getName());
+                        LogUtils.d("当前线程名字=" + Thread.currentThread().getName());
                         sum += ints[i++];
                         LogUtils.d("当前值=" + sum);
                     }

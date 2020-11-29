@@ -1,6 +1,6 @@
 package com.androidstudydata.thread;
 
-import com.easysocket.utils.LogUtil;
+import com.androidstudydata.LogUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +22,7 @@ public class VolitileTest {
             public void run() {
                 while (!flag) {
                     try {
-                        LogUtil.d("执行线程1");
+                        LogUtils.d("执行线程1");
                         TimeUnit.SECONDS.sleep(2);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -36,7 +36,7 @@ public class VolitileTest {
             @Override
             public void run() {
                 try {
-                    LogUtil.d("执行线程2");
+                    LogUtils.d("执行线程2");
                     flag=true;
                     TimeUnit.SECONDS.sleep(100);
                 } catch (InterruptedException e) {

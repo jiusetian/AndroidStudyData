@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.androidstudydata.act.TestActivity;
+import com.androidstudydata.adaptive.Android10;
 import com.androidstudydata.annotation.runtimeanno.AnnoUtils;
 import com.androidstudydata.annotation.runtimeanno.Person;
 import com.androidstudydata.commontest.ComTest;
@@ -34,6 +35,7 @@ import com.androidstudydata.rxjava.RxJavaTest;
 import com.androidstudydata.service.ServiceTest;
 import com.androidstudydata.thread.InterruputSleepThread;
 import com.androidstudydata.thread.VolitileTest;
+import com.androidstudydata.thread.asyncTask.AsyncTaskActivity;
 import com.androidstudydata.throwable.MyException;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
@@ -270,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
                     data1.setName("劳心劳肺");
                     datas.add(data);
                     datas.add(data1);
-                    LogUtil.INSTANCE.d("字符串=" + JsonUtil.objectToJsonString(datas));
+                    LogUtils.d("字符串=" + JsonUtil.objectToJsonString(datas));
 
                 } catch (JsonSyntaxException e) {
                     LogUtils.d("有异常");
@@ -425,6 +427,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startAct(FragmentActivity.class);
+            }
+        });
+
+        // AsyncTask测试
+        findViewById(R.id.async).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAct(AsyncTaskActivity.class);
+            }
+        });
+
+        // 适配测试
+        findViewById(R.id.adaptive).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Android10.apkWrite(MainActivity.this);
             }
         });
     }

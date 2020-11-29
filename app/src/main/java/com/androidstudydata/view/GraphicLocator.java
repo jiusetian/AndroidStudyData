@@ -11,7 +11,7 @@ import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import com.androidstudydata.LogUtil;
+import com.androidstudydata.LogUtils;
 import com.androidstudydata.R;
 
 /**
@@ -39,7 +39,7 @@ public class GraphicLocator {
         textPaint.setTypeface(Typeface.DEFAULT_BOLD);//采用默认的宽度
         textPaint.setColor(Color.WHITE);//采用的颜色
         int strWidth = (int) getStringWidth2(planeName)*2; //字符串宽度
-        LogUtil.INSTANCE.d("长度="+btm.getWidth()+"///"+strWidth);
+        LogUtils.d("长度="+btm.getWidth()+"///"+strWidth);
         canvas.drawText(planeName, btm.getWidth() / 2 - strWidth / 2,btm.getHeight()/2-bitmap.getHeight()/2-2, textPaint);//绘制上去字，中间参数为坐标点
         canvas.save(); //保存
         canvas.restore();

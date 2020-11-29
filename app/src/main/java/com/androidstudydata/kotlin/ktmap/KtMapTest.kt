@@ -1,6 +1,6 @@
 package com.androidstudydata.kotlin.ktmap
 
-import com.androidstudydata.LogUtil
+import com.androidstudydata.LogUtils
 
 /**
  * Author：Alex
@@ -34,8 +34,8 @@ class KtMapTest {
 
     fun arrayLength(){
         val array=IntArray(10)
-        LogUtil.i("大小01="+array.size)
+        LogUtils.i("大小01="+array.size)
         array[0]=2
-        LogUtil.i("大小01="+array.count())
+        LogUtils.i("大小01="+array.count())
     }
 }

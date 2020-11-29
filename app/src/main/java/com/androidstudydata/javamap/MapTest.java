@@ -4,7 +4,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.LruCache;
 
-import com.easysocket.utils.LogUtil;
+import com.androidstudydata.LogUtils;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -57,12 +57,12 @@ public class MapTest {
 //        LogUtil.d("刘兴荣测试="+map2.get(new String("lxr")));
 
         String str="lxr";
-        LogUtil.d("散列值1="+str.hashCode());
+        LogUtils.d("散列值1="+str.hashCode());
         //str.replace("l","刘");
         info.port=90;
         str=str+"1";
         //LogUtil.d("改变后="+str);
-        LogUtil.d("散列值2="+str.hashCode());
+        LogUtils.d("散列值2="+str.hashCode());
 //
 //        map.forEach(new BiConsumer<Info, String>() {
 //            @Override

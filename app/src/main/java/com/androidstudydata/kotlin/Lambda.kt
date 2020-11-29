@@ -2,6 +2,7 @@ package com.androidstudydata.kotlin
 
 import android.os.Build
 import android.support.annotation.RequiresApi
+import com.androidstudydata.LogUtils
 import com.easysocket.utils.LogUtil
 
 /**
@@ -39,7 +40,7 @@ object Lambda {
     fun denghaotest(a: Int,i: Int) = denghao(i)+a
 
     fun denghao(i: Int): Int {
-        LogUtil.d("等于="+(i+22))
+        LogUtils.d("等于="+(i+22))
         return i + 22
     }
 
