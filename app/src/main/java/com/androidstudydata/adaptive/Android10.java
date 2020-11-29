@@ -21,6 +21,7 @@ public class Android10 {
     public static void apkWrite(Context context) {
         String apkFilePath = context.getExternalFilesDir("apk").getAbsolutePath();
         LogUtils.d("路径="+apkFilePath);
+        //
         File newFile = new File(apkFilePath + File.separator + "temp.apk");
         OutputStream os = null;
         try {
