@@ -44,7 +44,7 @@ class HandlerActivity : AppCompatActivity() {
      */
     private class MyHandler(val actWeakReference: WeakReference<HandlerActivity>) : Handler() {
 
-        override fun handleMessage(msg: Message?) {
+        override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             //弱引用不为null才执行
             val act = actWeakReference.get()

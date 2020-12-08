@@ -1,5 +1,6 @@
 package com.androidstudydata.memory;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -36,6 +37,11 @@ public class MemoryActivity extends AppCompatActivity implements View.OnClickLis
         if (memoryLeak == null) {
             memoryLeak = new MemoryLeak();
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
     }
 
     @Override

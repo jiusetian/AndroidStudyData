@@ -2,6 +2,7 @@ package com.androidstudydata;
 
 import android.animation.FloatEvaluator;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,8 +50,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-//    @BindView(R.id.bindView)
+    //    @BindView(R.id.bindView)
 //    Button BindBtn;
+    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -311,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
                 //CoroutineTest.INSTANCE.cancelTest();
                 //CoroutineTest.INSTANCE.synTest();
                 //CoroutineTest.INSTANCE.mutexTest();
-               // CoroutineTest.INSTANCE.launchThreadTest();
+                // CoroutineTest.INSTANCE.launchThreadTest();
                 //CoroutineTest.INSTANCE.cancleTest2();
                 //CoroutineTest.INSTANCE.asyncTest();
                 //CoroutineTest.INSTANCE.hangup();
@@ -443,6 +445,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Android10.apkWrite(MainActivity.this);
+                //Android10.writeDownloadFile(context);
+            }
+        });
+
+        // 跳转act
+        findViewById(R.id.jump_act).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("android.intent.action.APP_A_SECOND_ACTIVITY");
+                startActivity(intent);
+            }
+        });
+
+        // 生命周期测试activity
+        findViewById(R.id.lifecycle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAct(LifecycleActivity.class);
             }
         });
     }
