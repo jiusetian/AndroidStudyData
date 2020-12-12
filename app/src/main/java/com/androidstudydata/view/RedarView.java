@@ -3,6 +3,7 @@ package com.androidstudydata.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.support.annotation.Nullable;
@@ -23,7 +24,9 @@ public class RedarView extends View {
     //雷达区画笔
     private Paint radarPaint;
     // 多边形个数
-    private int count = 6;
+    private int polygonCount = 50;
+    // 多边形的边数
+    private int polygonSides = 10;
     // 圆形半径
     private float radius;
 
@@ -45,7 +48,7 @@ public class RedarView extends View {
 
     private void init() {
         radarPaint = new Paint();
-        radarPaint.setColor(Color.BLACK);
+        radarPaint.setColor(Color.RED);
         radarPaint.setAntiAlias(true);
         radarPaint.setStrokeWidth(1);
         radarPaint.setStyle(Paint.Style.STROKE);
@@ -59,7 +62,7 @@ public class RedarView extends View {
         canvas.translate(centerX, centerY);
 
         // 画多边形
-        drawPolygon(canvas);
+        drawPolygonByMatrix(canvas);
 
         // 画线
         drawLines(canvas);
@@ -67,44 +70,73 @@ public class RedarView extends View {
         canvas.restore();
     }
 
-    // 画线
     private void drawLines(Canvas canvas) {
-        Path path1 = new Path();
-        Path path2 = new Path();
-        Path path3 = new Path();
-        Path[] paths = {path1, path2, path3};
+        // 路径
+        Path polyPath = new Path();
+        Matrix matrix = new Matrix();
+        // 初始点
+        float[] xy = {radius, 0};
+        polyPath.moveTo(xy[0], xy[1]);
+        polyPath.lineTo(0, 0);
+        // 画第一条线
+        canvas.drawPath(polyPath, radarPaint);
 
-        for (int i = 0; i < count; i++) {
-            // 计算弧度
-            float rad = (float) (60 * i * (Math.PI / 180));
-            // x坐标和y坐标
-            float x = (float) (Math.cos(rad) * radius);
-            float y = (float) (Math.sin(rad) * radius);
-
-            if (i == 0 || i == 1 || i == 2) {
-                paths[i].moveTo(x, y);
-            } else if (i == 3 || i == 4 || i == 5) {
-                paths[i-3].lineTo(x, y);
-                canvas.drawPath(paths[i-3], radarPaint);
-            }
+        for (int j = 1; j < polygonSides; j++) {
+            polyPath.reset();
+            matrix.reset();
+            // 旋转度数
+            matrix.setRotate(360f / polygonSides, 0, 0);
+            matrix.mapPoints(xy);
+            // 旋转后xy的值也发生了改变
+            polyPath.moveTo(xy[0], xy[1]);
+            polyPath.lineTo(0, 0);
+            canvas.drawPath(polyPath, radarPaint);
         }
     }
+
+    // 通过矩阵来计算坐标值，并画多边形
+    private void drawPolygonByMatrix(Canvas canvas) {
+        // 路径
+        Path polyPath = new Path();
+        Matrix matrix = new Matrix();
+        // 画六个多边形
+        for (int i = 0; i < polygonCount; i++) {
+            // 重置
+            polyPath.reset();
+            matrix.reset();
+            // 初始点
+            float[] xy = {radius * (polygonCount - i) / polygonCount, 0};
+            polyPath.moveTo(xy[0], xy[1]);
+
+            for (int j = 1; j < polygonSides; j++) {
+                // 旋转度数
+                matrix.setRotate(360f / polygonSides, 0, 0);
+                matrix.mapPoints(xy);
+                // 旋转后xy的值也发生了改变
+                polyPath.lineTo(xy[0], xy[1]);
+            }
+            // 添加完点以后进行绘制
+            polyPath.close();
+            canvas.drawPath(polyPath, radarPaint);
+        }
+    }
+
 
     // 画多边形
     private void drawPolygon(Canvas canvas) {
         // 路径
         Path polyPath = new Path();
         // 画六个多边形
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < polygonCount; i++) {
             // 重置
             polyPath.reset();
             // 一个多边形有6个点
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < polygonSides; j++) {
                 // 计算弧度
-                float rad = (float) (60 * j * (Math.PI / 180));
+                float rad = (float) ((360 / polygonSides) * j * (Math.PI / 180));
                 // x坐标和y坐标
-                float x = (float) (Math.cos(rad) * (radius * (count - i) / 6));
-                float y = (float) (Math.sin(rad) * (radius * (count - i) / 6));
+                float x = (float) (Math.cos(rad) * (radius * (polygonCount - i) / polygonCount));
+                float y = (float) (Math.sin(rad) * (radius * (polygonCount - i) / polygonCount));
                 if (j == 0) { // 第一个点
                     polyPath.moveTo(x, y);
                 } else {
@@ -115,7 +147,6 @@ public class RedarView extends View {
             polyPath.close();
             canvas.drawPath(polyPath, radarPaint);
         }
-
     }
 
     @Override

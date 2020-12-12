@@ -37,7 +37,7 @@ import com.androidstudydata.service.ServiceTest;
 import com.androidstudydata.thread.InterruputSleepThread;
 import com.androidstudydata.thread.VolitileTest;
 import com.androidstudydata.thread.asyncTask.AsyncTaskActivity;
-import com.androidstudydata.throwable.MyException;
+import com.androidstudydata.throwable.ExceptionTest;
 import com.androidstudydata.view.ConstraintLayoutActivity;
 import com.androidstudydata.view.CoordinatorLayoutActivity;
 import com.google.gson.JsonSyntaxException;
@@ -387,9 +387,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.exception_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyException myException = new MyException();
-                myException.checkExceptionTest();
-                myException.runtimeExceptionTest();
+//                MyException myException = new MyException();
+//                myException.checkExceptionTest();
+//                myException.runtimeExceptionTest();
+                ExceptionTest.whileTest3();
             }
         });
 
