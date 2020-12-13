@@ -26,7 +26,7 @@ import com.androidstudydata.genericity.TypeTest;
 import com.androidstudydata.handler.HandlerDemo;
 import com.androidstudydata.json.JsonUtil;
 import com.androidstudydata.json.MyData;
-import com.androidstudydata.kotlin.KotlinActivity;
+import com.androidstudydata.kotlin.coroutines.CoroutineTest;
 import com.androidstudydata.matrix.MatrixTest;
 import com.androidstudydata.memory.MemoryActivity;
 import com.androidstudydata.okhttp.BackPressureTest;
@@ -313,12 +313,13 @@ public class MainActivity extends AppCompatActivity {
                 //CoroutineTest.INSTANCE.cancelTest();
                 //CoroutineTest.INSTANCE.synTest();
                 //CoroutineTest.INSTANCE.mutexTest();
-                // CoroutineTest.INSTANCE.launchThreadTest();
+                //CoroutineTest.INSTANCE.launchThreadTest();
                 //CoroutineTest.INSTANCE.cancleTest2();
                 //CoroutineTest.INSTANCE.asyncTest();
-                //CoroutineTest.INSTANCE.hangup();
+                CoroutineTest.INSTANCE.hangup();
                 //CoroutineTest.INSTANCE.coroutineHangup();
-                startAct(KotlinActivity.class);
+
+                //startAct(KotlinActivity.class);
 
 //                ReturnAndSkip returnAndSkip=new ReturnAndSkip();
 //                returnAndSkip.label();

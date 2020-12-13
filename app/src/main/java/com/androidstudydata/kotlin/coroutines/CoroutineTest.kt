@@ -13,18 +13,30 @@ import kotlinx.coroutines.sync.withLock
  */
 object CoroutineTest {
 
+    /**
+     * Log：
+     * 30 执行协程外
+     * 19 协程启动
+     * 28 取消协程
+     * 38 取消协程2
+     * 22 执行协程
+     * 分析：协程不会阻塞主线程，所以30先于协程体执行，38先于22执行，说明在线程sleep的是协程是不能被取消的
+     */
     fun cancelTest() {
+
         val job = GlobalScope.launch {
             LogUtils.e("协程启动")
             // 如果delay就可以被取消
-            Thread.sleep(3000)
+            Thread.sleep(5000)
             LogUtils.e("执行协程")
         }
-
+        LogUtils.e("执行协程外")
         Thread.sleep(2000)
         // 取消协程
         job.cancel()
         LogUtils.e("取消协程")
+        Thread.sleep(2000)
+        LogUtils.e("取消协程2")
     }
 
     fun cancleTest2() = runBlocking {
@@ -60,6 +72,17 @@ object CoroutineTest {
     }
 
 
+    /**
+     * log：
+    the second coroutine
+    the first coroutine
+    线程22=DefaultDispatcher-worker-2
+    线程11=DefaultDispatcher-worker-1
+    the second coroutine
+    the first coroutine
+
+    分析：两个协程运行在不同的线程上
+     */
     fun launchThreadTest() {
 
         // 启动协程 1
@@ -80,8 +103,16 @@ object CoroutineTest {
         }
     }
 
+    /**
+     * Log：
+    125 进入job2
+    130 当前值2=2000
+    115 进入job1
+    120 当前值1=3000
 
-    // 这样写是线程安全的
+    分析：相当于多线程的同步锁，当有协程进入这个锁以后，其他协程是不能进入这个锁的，只有等这个协程释放了锁
+    才能拿到执行权
+     */
     fun mutexTest() {
         val mutex = Mutex()
         var i = 0
@@ -131,9 +162,13 @@ object CoroutineTest {
 
         // 如果指定了在main线程中执行，则肯定会阻塞UI
         GlobalScope.launch(context = Dispatchers.Main) {
-            withContext(context = Dispatchers.Unconfined) {
+            // Dispatchers.Unconfined：在调用的线程直接执行
+            // 如果用 Dispatchers.Unconfined会在主线程中执行
+            withContext(context = Dispatchers.IO) {
                 // 这里并不会阻塞主线程，而是在另外一个线程中执行
-                repeat(1000) {
+                repeat(10) {
+                    // 如果不在主线程sleep就不会阻塞
+                    // Thread.sleep(1000 * 5)
                     LogUtils.e("协程执行${Thread.currentThread().name},$it")
                 }
             }
@@ -143,6 +178,24 @@ object CoroutineTest {
     }
 
     // 创建协程
+    /**
+    Log：
+    协程初始化开始，时间: 1607865483618
+    协程初始化完成，时间: 1607865483649
+    协程任务1打印第1 次，时间: 1607865483649
+    协程任务1打印第2 次，时间: 1607865483649
+    协程任务1打印第3 次，时间: 1607865483649
+    主线程 sleep ，时间: 1607865483655
+    协程任务2打印第1 次，时间: 1607865484154
+    协程任务2打印第2 次，时间: 1607865484154
+    协程任务2打印第3 次，时间: 1607865484154
+    主线程运行，时间: 1607865484655
+    主线程打印第1 次，时间: 1607865484656
+    主线程打印第2 次，时间: 1607865484656
+    主线程打印第3 次，时间: 1607865484656
+
+    分析：
+     */
     fun createCoroutine() {
         Log.d("AA", "协程初始化开始，时间: " + System.currentTimeMillis())
         // 以launch方法创建协程，因为是单线程，程序会按顺序执行，但是中间的delay是不会阻塞主线程的，
@@ -159,6 +212,7 @@ object CoroutineTest {
             // suspend修饰的函数是挂起函数，也就是说挂起函数会按顺序执行，前面的还没执行完绝对不会执行
             // 后面的
             Log.d("AA", "协程初始化完成，时间: " + System.currentTimeMillis())
+
             for (i in 1..3) {
                 Log.d("AA", "协程任务1打印第$i 次，时间: " + System.currentTimeMillis())
             }
@@ -174,12 +228,26 @@ object CoroutineTest {
         Thread.sleep(1000)
 
         Log.d("AA", "主线程运行，时间: " + System.currentTimeMillis())
+
         for (i in 1..3) {
             Log.d("AA", "主线程打印第$i 次，时间: " + System.currentTimeMillis())
         }
     }
 
     // 协程挂起函数的测试
+    /**
+    246 主线程执行0
+    246 主线程执行1
+    246 主线程执行2
+    246 主线程执行3
+    246 主线程执行4
+    246 主线程执行5
+    246 主线程执行6
+    246 主线程执行7
+    327 token - userInfo
+
+    分析：当协程挂起的时候，不会阻塞主线程的执行
+     */
     fun suspendTest() {
         GlobalScope.launch {
             val token = getToken()
@@ -194,6 +262,31 @@ object CoroutineTest {
 
     // 执行顺序的测试，这个执行顺序没有固定的规律，经测试先执行主线程的函数，但是主线程执行到一定的时候，又会
     // 执行协程体的函数，然后相间执行
+
+    // 部分Log：
+    // invokeSuspend():269 协程体的执行0
+    // 主线程的执行34
+    // 主线程的执行35
+    // invokeSuspend():269 协程体的执行1
+    // 主线程的执行36
+    // invokeSuspend():269 协程体的执行2
+    // 主线程的执行37
+    // 主线程的执行38
+    // invokeSuspend():269 协程体的执行3
+    // 主线程的执行39
+    // invokeSuspend():269 协程体的执行4
+    // 主线程的执行40
+    // 主线程的执行41
+    // invokeSuspend():269 协程体的执行5
+    // 主线程的执行42
+    // 主线程的执行43
+    // invokeSuspend():269 协程体的执行6
+    // 主线程的执行44
+    // 主线程的执行45
+    // invokeSuspend():269 协程体的执行7
+    // 主线程的执行46
+    // 主线程的执行47
+    // invokeSuspend():269 协程体的执行8
     fun excuteTest() {
 
         val job = GlobalScope.launch(start = CoroutineStart.LAZY) {
@@ -201,16 +294,15 @@ object CoroutineTest {
                 LogUtils.e("协程体的执行$it")
             }
         }
+        job.start()
 
-        repeat(100) {
+        repeat(200) {
             LogUtils.e("主线程的执行$it")
         }
-
-        job.start()
     }
 
     // 协程异步测试
-    fun asyncTest2(){
+    fun asyncTest2() {
         val deferred = GlobalScope.async {
             delay(1000L)
             Log.d("AA", "This is async ")
@@ -220,8 +312,15 @@ object CoroutineTest {
         //val result=deferred.await()
     }
 
-    fun asyncTest() {
+    /**
+    主线程位于协程之后的代码执行，时间:  1607866296532
+    协程 other start
+    This is async
+    async result is 返回值
+    协程 other end
 
+     */
+    fun asyncTest() {
         // 主协程
         GlobalScope.launch {
             // async一般用在有返回值的协程体，而 launch是没有返回值的，这就是他们两的主要区别
@@ -258,6 +357,14 @@ object CoroutineTest {
             repeat(100) {
                 Log.e("AA", "协程任务打印第$it 次，时间: ${System.currentTimeMillis()}")
 
+                //主线程打印第97 次，时间:  1607866631090
+                //主线程打印第98 次，时间:  1607866631090
+                //主线程打印第99 次，时间:  1607866631090
+                //协程任务打印第51 次，时间: 1607866632087
+                //协程任务打印第52 次，时间: 1607866632087
+                if (it == 50) {
+                    delay(1000)
+                }
             }
 
         }

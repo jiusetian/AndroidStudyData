@@ -60,7 +60,7 @@ dependencies {
     // gson
     implementation 'com.google.code.gson:gson:2.2.4'
     // 测试EasySocket
-    implementation 'com.github.jiusetian:EasySocket:1.6.3'
+    implementation 'com.github.jiusetian:EasySocket:1.8.5'
 
     // 测试BaseAdapter框架
     // implementation 'com.github.jiusetian:BaseAdapter:1.0.1'

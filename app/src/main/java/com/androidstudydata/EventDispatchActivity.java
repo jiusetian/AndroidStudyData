@@ -102,6 +102,6 @@ public class EventDispatchActivity extends AppCompatActivity {
         //初始化EasySocket
         EasySocket.getInstance()
                 .options(options) //项目配置
-                .buildConnection();//创建一个socket连接
+                .createConnection();//创建一个socket连接
     }
 }
